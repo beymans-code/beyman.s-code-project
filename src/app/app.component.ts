@@ -28,6 +28,6 @@ export class AppComponent {
   }
 
   public toggleDark() {
-    this.materialPaletteGeneratorService.getImagePalette();
+    this.materialPaletteGeneratorService.getImagePalette(!document.body.classList.contains('dark'));
   }
 }
