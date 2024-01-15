@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "beyman.s-code-project": {
+    "beyman.s-gml-project": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -41,6 +41,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "./",
               "budgets": [
                 {
                   "type": "initial",
@@ -53,9 +54,12 @@
                   "maximumError": "4kb"
                 }
               ],
+              "optimization": true,
+              "sourceMap": false,
               "outputHashing": "all"
             },
             "development": {
+              "baseHref": "./",
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
