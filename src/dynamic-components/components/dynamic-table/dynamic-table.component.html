@@ -1,0 +1,71 @@
+@if (_tableConfig) {
+<div class="table-actions row justify-content-space-between">
+    <app-dynamic-form class="table-search col-sm-12 col-md-6" [baseControls]="controls || []" #searchForm
+        (formValue)="search($event)"></app-dynamic-form>
+    <div class="col-sm-12 col-md-6 d-flex   align-items-end justify-content-end">
+        <app-dynamic-button label="agregar" color="dark" (action)="add.emit()"></app-dynamic-button>
+    </div>
+</div>
+
+<app-dynamic-card [hideActions]="true">
+    <cdk-virtual-scroll-viewport itemSize="50" content class="table-container" minBufferPx="300" maxBufferPx="500"
+        [id]="'table-container' + _tableConfig.id" #container (scroll)="scroll()">
+        <table>
+            <thead>
+                <tr>
+                    @for (_col of _tableConfig.columns; track _col.key; let idx = $index, e = $even) {
+                    <th [class.sticky]="_col.sticky" [class.left]="_col.sticky === 'left'"
+                        [class.right]="_col.sticky === 'right'"
+                        [class.shadowLeft]="_col.sticky === 'left' && scrollLef !== undefined && scrollLef > 0"
+                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 98"
+                        [style.top]="headerVirtualTopPosition">
+                        {{_col.headerText}}
+                    </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @for (_row of filteredData; track trackByIndex; let idx = $index, e = $even) { -->
+                <tr *cdkVirtualFor="let _row of filteredData; index as idx">
+                    @for (_col of _tableConfig.columns; track _col.key) {
+                    <td [class.sticky]="_col.sticky" [class.left]="_col.sticky === 'left'"
+                        [class.right]="_col.sticky === 'right'"
+                        [class.shadowLeft]="_col.sticky === 'left' && scrollLef !== undefined && scrollLef > 0"
+                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 98"
+                        [class.action-cell]="_col.key === 'actions'">
+                        @if (_col.key === 'actions') {
+                        <ng-container [ngTemplateOutlet]="buttons"
+                            [ngTemplateOutletContext]="{index: getCell(_row, 'index')}">
+                        </ng-container>
+                        } @else if (_col.mask === 'logo') {
+                        <span class="logo">
+                            {{getCell(_row, _col.key)}}
+                        </span>
+                        } @else {
+                        {{getCell(_row, _col.key)}}
+                        }
+                    </td>
+                    }
+                </tr>
+                <!-- } -->
+            </tbody>
+        </table>
+    </cdk-virtual-scroll-viewport>
+</app-dynamic-card>
+} @else {
+Agrega la configuracion de la tabla.
+}
+
+<ng-template #buttons let-index='index'>
+    <app-dynamic-button actions icon="more_vert" type="fab" class="more"
+        (action)="currentEditRow = index"></app-dynamic-button>
+
+    @if(currentEditRow === index) {
+    <div class="buttons-container card" [id]="'buttons-container'+ index" (focus)="currentEditRow = index;"
+        (blur)="currentEditRow = undefined;">
+        <app-dynamic-button actions icon="edit" type="fab" (action)="startEditRow(index)"></app-dynamic-button>
+        <app-dynamic-button actions icon="delete" type="fab" (action)="delete(index)"></app-dynamic-button>
+        <app-dynamic-button actions icon="close" type="fab" (action)="closeMenu(index)"></app-dynamic-button>
+    </div>
+    }
+</ng-template>

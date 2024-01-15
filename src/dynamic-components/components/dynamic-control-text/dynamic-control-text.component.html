@@ -1,0 +1,14 @@
+@if (this._formControl) {
+<div class="beyman-s-input">
+    <div class="label-container">
+        <label [for]="baseControl.key">{{ baseControl.label }}</label>
+    </div>
+    <div class="input-container">
+        <input [id]="baseControl.key" [type]="baseControl._input_type || 'text'" [formControl]="_formControl"
+            [placeholder]="baseControl._input_placeholder" />
+        @if (baseControl._input_type === 'date') {
+        <label class="icon">calendar_month</label>
+        }
+    </div>
+</div>
+}

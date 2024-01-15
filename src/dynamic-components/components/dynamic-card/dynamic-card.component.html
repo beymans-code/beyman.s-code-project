@@ -1,0 +1,16 @@
+<div class="card">
+    @if (title) {
+    <h2 class="title">
+        {{title}}
+    </h2>
+    }
+    <div class="content">
+        <div class="divider"></div>
+        <ng-content select="[content]"></ng-content>
+    </div>
+    @if (!hideActions) {
+    <div class="actions d-flex justify-content-space-around">
+        <ng-content select="[actions]"></ng-content>
+    </div>
+    }
+</div>

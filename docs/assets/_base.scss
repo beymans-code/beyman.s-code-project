@@ -1,0 +1,55 @@
+html,
+body {
+    background: var(--md-sys-color-background) !important;
+    color: var(--md-sys-color-on-background);
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(121, 121, 121, 0.363);
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: rgba(121, 121, 121, 0.667);
+    }
+}
+
+@media (pointer:coarse) {
+    *::-webkit-scrollbar {
+        width: 2px;
+        height: 2px;
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+* {
+    scrollbar-gutter: stable both-edges;
+}
+
+router-outlet~* {
+    min-height: calc(100vh - 40px);
+    display: flex;
+    justify-content: center;
+    max-width: 1300px;
+    margin: auto;
+}

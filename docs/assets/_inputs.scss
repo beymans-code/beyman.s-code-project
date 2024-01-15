@@ -1,0 +1,245 @@
+@mixin inputBorder($background-color, $border-color, $outline-color ) {
+    background-color: $background-color;
+    border-color: $border-color !important;
+    outline-color: $outline-color !important;
+}
+
+@mixin appTransition($time ) {
+    transition: all $time cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s !important;
+
+}
+
+@mixin labelFloat() {
+    transform: translate(3px, -13px) scale(0.65) !important;
+
+    label {
+        font-weight: 500 !important;
+    }
+}
+
+
+
+@mixin inputPlaceholder($color ) {
+    ::-webkit-input-placeholder {
+        /* WebKit browsers */
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    :-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    input::placeholder {
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    textarea::-webkit-input-placeholder {
+        /* WebKit browsers */
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    textarea:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    textarea::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    textarea:-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+    textarea::placeholder {
+        color: $color;
+        @include appTransition(400ms);
+
+    }
+
+}
+
+.beyman-s-input {
+    display: block;
+    @include inputPlaceholder(transparent);
+
+    >div.label-container {
+        @include appTransition(300ms);
+        transform-origin: left center;
+        transform: translateY(0px) scale(1);
+        position: absolute;
+        bottom: 0;
+        top: -3px;
+        height: fit-content;
+        margin: auto;
+    }
+
+    label {
+        transition: all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s;
+        font-weight: 600;
+        font-size: 13px;
+        padding: 0 12px;
+        color: var(--onSurface);
+    }
+
+    .input-container {
+        transition: all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s;
+        border: solid 1px var(--outline);
+        padding: 0 10px;
+        border-radius: 10px;
+        outline: solid 3px transparent;
+        outline-offset: 0px;
+        background-color: rgba(114, 114, 114, 0.112) !important;
+    }
+
+    textarea,
+    input {
+        display: block;
+        width: 100%;
+        border: none;
+        padding: 2px 0;
+        min-height: 40px !important;
+        background: transparent;
+        font-size: 14px;
+        color: var(--onSurface);
+        font-weight: 500;
+        transition: all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s;
+
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+
+        &:disabled {
+            cursor: default;
+            background-color: transparent;
+            color: -internal-light-dark(rgb(84, 84, 84), rgb(170, 170, 170));
+            border-color: transparent;
+        }
+
+    }
+
+
+    &:hover,
+    &:focus-within {
+        @include inputPlaceholder(unset);
+
+        .label-container {
+            @include labelFloat();
+        }
+
+        .input-container {
+            border: solid 1px transparent;
+            outline-style: auto;
+            outline: solid 3px var(--outline);
+            outline-offset: -3px;
+
+            input {
+                outline: none;
+            }
+        }
+    }
+
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+
+    input~.icon {
+        position: absolute;
+        right: 16px;
+        top: 23px;
+        bottom: 0;
+        margin: auto;
+        height: fit-content;
+        font-size: 20px;
+        pointer-events: none;
+    }
+}
+
+.hasValue .label-container {
+    @include labelFloat();
+}
+
+
+
+.disabled {
+    cursor: not-allowed;
+
+    .beyman-s-input {
+        pointer-events: none !important;
+
+        * {
+            color: #00000073 !important;
+        }
+
+        .input-container {
+            background-color: rgba(114, 114, 114, 0.305) !important;
+            cursor: not-allowed;
+            @include inputBorder(#0000000a, #7676764d, transparent);
+        }
+    }
+}
+
+.invalid {
+    cursor: text;
+
+    .beyman-s-input {
+        * {
+            color: var(--error) !important;
+        }
+
+        .input-container {
+            // background-color: var(--error) !important;
+            @include inputBorder( var(--error),  var(--error), transparent);
+        }
+
+        &:hover,
+        &:focus-within {
+            .input-container {
+                border: solid 1px transparent !important;
+                outline: solid 3px  var(--error) !important;
+            }
+        }
+    }
+}

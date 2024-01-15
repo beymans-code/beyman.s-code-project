@@ -1,0 +1,7 @@
+<button class="{{color || ''}} {{type || ''}} " [disabled]="disabled" (click)="action.emit()">
+    @if (label) {
+    <label>{{label}}</label>
+    } @else if (icon) {
+    <label class="icon">{{icon}}</label>
+    }
+</button>

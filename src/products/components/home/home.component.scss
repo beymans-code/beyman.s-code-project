@@ -1,0 +1,66 @@
+#imageBackground1 {
+    &::before {
+        content: '';
+        width: calc(100% + 30px);
+        height: 100%;
+        display: block;
+        position: absolute;
+        background: #00000030;
+        left: -15px;
+        z-index: 0;
+    }
+
+    form {
+        z-index: 3;
+        position: relative;
+    }
+
+    height: 60vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 25px !important;
+    margin: 35px 25px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    img#imageBackground {
+        display: block;
+        visibility: hidden;
+        position: fixed;
+        z-index: -10000;
+        min-width: 3000px;
+        width: 100vw;
+    }
+
+    img#beyman {
+        position: absolute;
+        bottom: 0;
+        width: 300px;
+        border-radius: 100%;
+        margin: 20px 10px;
+        border: solid 1px var(--primaryContainer); 
+        // border-top-color: var(--primary-700);
+        // border-left-color: var(--secondary-400);
+        // border-right-color: var(--accent-400);
+        // border-bottom-color: var(--accent-400);
+        // box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
+        background: var(--primary-opacity-700);
+        backdrop-filter: blur(10px);
+        z-index: 5;
+    }
+
+    * {
+        z-index: 2;
+    }
+
+    .home-text {
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 20px;
+        width: 50%;
+        left: 0;
+        margin: 10px 0;
+    }
+}
