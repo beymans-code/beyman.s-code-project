@@ -22,10 +22,12 @@ export class AppComponent {
    * Se ejecuta al renderizar el componente.
    */
   public ngAfterViewInit(): void {
-    this.materialPaletteGeneratorService.getImagePalette();
+    setTimeout(() => {
+      this.materialPaletteGeneratorService.getImagePalette();
+    }, 1000);
   }
 
   public toggleDark() {
-    this.materialPaletteGeneratorService.getImagePalette(!document.body.classList.contains('dark'));
+    this.materialPaletteGeneratorService.getImagePalette();
   }
 }

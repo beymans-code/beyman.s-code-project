@@ -49,7 +49,7 @@ export class HomeComponent {
   }
 
   public async generatePalette() {
-    this.materialPaletteGeneratorService.getImagePalette();
+    this.materialPaletteGeneratorService.getImagePalette(!document.body.classList.contains('dark'));
   }
 
 }
