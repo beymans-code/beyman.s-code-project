@@ -1,8 +1,8 @@
 <div class="col-12 padding-0">
-    <app-dynamic-table #table [tableConfig]="tableConfig" (edit)="editRow($event)" (dataChange)="dataChange($event)"
-        (add)="router.navigate(['/product'])"></app-dynamic-table>
+    <dynamic-table #table [tableConfig]="tableConfig" (edit)="editRow($event)" (dataChange)="dataChange($event)"
+        (add)="router.navigate(['/product'])"></dynamic-table>
 </div>
 
 <div class="col-sm-12 d-flex   align-items-center justify-content-center">
-    <app-dynamic-button label="Reiniciar" color="dark" (action)="reset()"></app-dynamic-button>
+    <dynamic-button label="Reiniciar" color="dark" (action)="reset()"></dynamic-button>
 </div>

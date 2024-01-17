@@ -7,7 +7,9 @@ import {
   hexFromArgb,
   MaterialDynamicColors,
   Scheme,
+  Theme,
 } from '@material/material-color-utilities';
+import { addItem } from './storage';
 
 export interface ApplicationTheme {
   id: string;
@@ -110,121 +112,121 @@ export class MaterialPaletteGeneratorService {
     // let systemDark = false;
 
     getImageBase64(imgFile?.src || '')
-      .then((base64String) => {
-        console.log('Imagen en base64:', base64String);
-
-        themeFromImage(imgFile).then((theme) => {
-          if (systemDark) {
-            document.body.classList.add('dark');
-          } else {
-            document.body.classList.remove('dark');
-          }
-          console.log(theme);
-
-          const scheme: Scheme = systemDark
-            ? theme.schemes.dark
-            : theme.schemes.light;
-
-          const primary = hexFromArgb(scheme.primary);
-          const onPrimary = hexFromArgb(scheme.onPrimary);
-          const primaryContainer = hexFromArgb(scheme.primaryContainer);
-          const onPrimaryContainer = hexFromArgb(scheme.onPrimaryContainer);
-          const secondary = hexFromArgb(scheme.secondary);
-          const onSecondary = hexFromArgb(scheme.onSecondary);
-          const secondaryContainer = hexFromArgb(scheme.secondaryContainer);
-          const onSecondaryContainer = hexFromArgb(scheme.onSecondaryContainer);
-          const tertiary = hexFromArgb(scheme.tertiary);
-          const onTertiary = hexFromArgb(scheme.onTertiary);
-          const tertiaryContainer = hexFromArgb(scheme.tertiaryContainer);
-          const onTertiaryContainer = hexFromArgb(scheme.onTertiaryContainer);
-          const error = hexFromArgb(scheme.error);
-          const onError = hexFromArgb(scheme.onError);
-          const errorContainer = hexFromArgb(scheme.errorContainer);
-          const onErrorContainer = hexFromArgb(scheme.onErrorContainer);
-          const background = hexFromArgb(scheme.background);
-          const onBackground = hexFromArgb(scheme.onBackground);
-          const surface = hexFromArgb(scheme.surface);
-          const onSurface = hexFromArgb(scheme.onSurface);
-          const surfaceVariant = hexFromArgb(scheme.surfaceVariant);
-          const onSurfaceVariant = hexFromArgb(scheme.onSurfaceVariant);
-          const outline = hexFromArgb(scheme.outline);
-          const outlineVariant = hexFromArgb(scheme.outlineVariant);
-          const shadow = hexFromArgb(scheme.shadow);
-          const scrim = hexFromArgb(scheme.scrim);
-          const inverseSurface = hexFromArgb(scheme.inverseSurface);
-          const inverseOnSurface = hexFromArgb(scheme.inverseOnSurface);
-          const inversePrimary = hexFromArgb(scheme.inversePrimary);
-
-          this.setCssVar('primary', primary);
-          this.setCssVar('onPrimary', onPrimary);
-          this.setCssVar('primaryContainer', primaryContainer);
-          this.setCssVar('onPrimaryContainer', onPrimaryContainer);
-          this.setCssVar('secondary', secondary);
-          this.setCssVar('onSecondary', onSecondary);
-          this.setCssVar('secondaryContainer', secondaryContainer);
-          this.setCssVar('onSecondaryContainer', onSecondaryContainer);
-          this.setCssVar('tertiary', tertiary);
-          this.setCssVar('onTertiary', onTertiary);
-          this.setCssVar('tertiaryContainer', tertiaryContainer);
-          this.setCssVar('onTertiaryContainer', onTertiaryContainer);
-          this.setCssVar('error', error);
-          this.setCssVar('onError', onError);
-          this.setCssVar('errorContainer', errorContainer);
-          this.setCssVar('onErrorContainer', onErrorContainer);
-          this.setCssVar('background', background);
-          this.setCssVar('onBackground', onBackground);
-          this.setCssVar('surface', surface);
-          this.setCssVar('onSurface', onSurface);
-          this.setCssVar('surfaceVariant', surfaceVariant);
-          this.setCssVar('onSurfaceVariant', onSurfaceVariant);
-          this.setCssVar('outline', outline);
-          this.setCssVar('outlineVariant', outlineVariant);
-          this.setCssVar('shadow', shadow);
-          this.setCssVar('scrim', scrim);
-          this.setCssVar('inverseSurface', inverseSurface);
-          this.setCssVar('inverseOnSurface', inverseOnSurface);
-          this.setCssVar('inversePrimary', inversePrimary);
-
-          _background = background;
-          // Print out the theme as JSON
-          console.log(JSON.stringify(theme, null, 2));
-
-          // Apply the theme to the body by updating custom properties for material tokens
-          applyTheme(theme, { target: document.body, dark: systemDark });
-
-          this.generatePalette(
-            primary,
-            this.themeCssVariables[0],
-            10,
-            onPrimary,
-            systemDark
-          );
-          this.generatePalette(
-            tertiary,
-            this.themeCssVariables[2],
-            10,
-            onTertiary,
-            systemDark
-          );
-          this.generatePalette(
-            secondary,
-            this.themeCssVariables[1],
-            10,
-            onSecondary,
-            systemDark
-          );
-          this.generatePalette(
-            error,
-            this.themeCssVariables[3],
-            10,
-            onError,
-            systemDark
-          );
+      .then(() => {
+        themeFromImage(imgFile).then((theme: Theme) => {
+          addItem('theme', theme);
+          this.changeTheme(theme, systemDark)
         });
       })
       .catch((error) => {
         console.error('Error:', error.message);
       });
+  }
+
+  public changeTheme(theme: Theme, systemDark: boolean) {
+    if (systemDark) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+
+    const scheme: Scheme = systemDark
+      ? theme.schemes.dark
+      : theme.schemes.light;
+
+    const primary = hexFromArgb(scheme.primary);
+    const onPrimary = hexFromArgb(scheme.onPrimary);
+    const primaryContainer = hexFromArgb(scheme.primaryContainer);
+    const onPrimaryContainer = hexFromArgb(scheme.onPrimaryContainer);
+    const secondary = hexFromArgb(scheme.secondary);
+    const onSecondary = hexFromArgb(scheme.onSecondary);
+    const secondaryContainer = hexFromArgb(scheme.secondaryContainer);
+    const onSecondaryContainer = hexFromArgb(scheme.onSecondaryContainer);
+    const tertiary = hexFromArgb(scheme.tertiary);
+    const onTertiary = hexFromArgb(scheme.onTertiary);
+    const tertiaryContainer = hexFromArgb(scheme.tertiaryContainer);
+    const onTertiaryContainer = hexFromArgb(scheme.onTertiaryContainer);
+    const error = hexFromArgb(scheme.error);
+    const onError = hexFromArgb(scheme.onError);
+    const errorContainer = hexFromArgb(scheme.errorContainer);
+    const onErrorContainer = hexFromArgb(scheme.onErrorContainer);
+    const background = hexFromArgb(scheme.background);
+    const onBackground = hexFromArgb(scheme.onBackground);
+    const surface = hexFromArgb(scheme.surface);
+    const onSurface = hexFromArgb(scheme.onSurface);
+    const surfaceVariant = hexFromArgb(scheme.surfaceVariant);
+    const onSurfaceVariant = hexFromArgb(scheme.onSurfaceVariant);
+    const outline = hexFromArgb(scheme.outline);
+    const outlineVariant = hexFromArgb(scheme.outlineVariant);
+    const shadow = hexFromArgb(scheme.shadow);
+    const scrim = hexFromArgb(scheme.scrim);
+    const inverseSurface = hexFromArgb(scheme.inverseSurface);
+    const inverseOnSurface = hexFromArgb(scheme.inverseOnSurface);
+    const inversePrimary = hexFromArgb(scheme.inversePrimary);
+
+    this.setCssVar('primary', primary);
+    this.setCssVar('onPrimary', onPrimary);
+    this.setCssVar('primaryContainer', primaryContainer);
+    this.setCssVar('onPrimaryContainer', onPrimaryContainer);
+    this.setCssVar('secondary', secondary);
+    this.setCssVar('onSecondary', onSecondary);
+    this.setCssVar('secondaryContainer', secondaryContainer);
+    this.setCssVar('onSecondaryContainer', onSecondaryContainer);
+    this.setCssVar('tertiary', tertiary);
+    this.setCssVar('onTertiary', onTertiary);
+    this.setCssVar('tertiaryContainer', tertiaryContainer);
+    this.setCssVar('onTertiaryContainer', onTertiaryContainer);
+    this.setCssVar('error', error);
+    this.setCssVar('onError', onError);
+    this.setCssVar('errorContainer', errorContainer);
+    this.setCssVar('onErrorContainer', onErrorContainer);
+    this.setCssVar('background', background);
+    this.setCssVar('onBackground', onBackground);
+    this.setCssVar('surface', surface);
+    this.setCssVar('onSurface', onSurface);
+    this.setCssVar('surfaceVariant', surfaceVariant);
+    this.setCssVar('onSurfaceVariant', onSurfaceVariant);
+    this.setCssVar('outline', outline);
+    this.setCssVar('outlineVariant', outlineVariant);
+    this.setCssVar('shadow', shadow);
+    this.setCssVar('scrim', scrim);
+    this.setCssVar('inverseSurface', inverseSurface);
+    this.setCssVar('inverseOnSurface', inverseOnSurface);
+    this.setCssVar('inversePrimary', inversePrimary);
+
+    _background = background;
+
+    this.generatePalette(
+      primary,
+      this.themeCssVariables[0],
+      10,
+      onPrimary,
+      systemDark
+    );
+    this.generatePalette(
+      tertiary,
+      this.themeCssVariables[2],
+      10,
+      onTertiary,
+      systemDark
+    );
+    this.generatePalette(
+      secondary,
+      this.themeCssVariables[1],
+      10,
+      onSecondary,
+      systemDark
+    );
+    this.generatePalette(
+      error,
+      this.themeCssVariables[3],
+      10,
+      onError,
+      systemDark
+    );
+
+    // Apply the theme to the body by updating custom properties for material tokens
+    // applyTheme(theme, { target: document.body, dark: systemDark });
   }
 
 
@@ -311,15 +313,9 @@ export class MaterialPaletteGeneratorService {
     let coloresOpacos = [];
     let contrastes = [];
 
-    if (dark) {
-      colorStart = this.aumentarSaturacion(colorStart, 30);
-      coloresOpacos = this.aumentarOpacidad1(colorStart, colorCount).reverse();
-      contrastes = this.aumentarOpacidad(contrastStart, colorCount).reverse();
-    } else {
-      colorStart = this.aumentarSaturacion(colorStart, 0);
-      coloresOpacos = this.aumentarOpacidad(colorStart, colorCount).reverse();
-      contrastes = this.aumentarOpacidad1(contrastStart, colorCount).reverse();
-    }
+    // colorStart = this.aumentarSaturacion(colorStart, 0);
+    coloresOpacos = this.aumentarOpacidad(colorStart, colorCount).reverse();
+    contrastes = this.aumentarOpacidad1(contrastStart, colorCount).reverse();
 
     const palette = [];
 
@@ -513,7 +509,7 @@ export class MaterialPaletteGeneratorService {
    * @param hex - Color hexadecimal.
    * @returns Array.
    */
-  private convertToRGB(hex: string) {
+  private convertToRGB(hex: string) {    
     const color = [];
     color[0] = parseInt(this.trim(hex).substring(0, 2), 16);
     color[1] = parseInt(this.trim(hex).substring(2, 4), 16);

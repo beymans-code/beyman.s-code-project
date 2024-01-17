@@ -1,11 +1,11 @@
 <div class="card">
     @if (title) {
-    <h2 class="title">
+    <h2 class="title" [style.text-align]="titleAlign || 'left'">
         {{title}}
     </h2>
     }
     <div class="content">
-        <div class="divider"></div>
+        <!-- <div class="divider"></div> -->
         <ng-content select="[content]"></ng-content>
     </div>
     @if (!hideActions) {

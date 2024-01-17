@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "beyman.s-gml-project": {
+    "beyman.s-code-project": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {

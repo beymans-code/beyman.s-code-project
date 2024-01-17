@@ -21,9 +21,9 @@
 		@switch (_baseControl.type) {
 		@case ('Input') {
 
-		<app-dynamic-control-text
+		<dynamic-control-text
 			[_formControl]="abstractControlToFormControl(formGroup.get(_baseControl.key.trim() || ''))"
-			[baseControl]="_baseControl"></app-dynamic-control-text>
+			[baseControl]="_baseControl"></dynamic-control-text>
 
 		} @case ('CheckBox') {
 

@@ -24,7 +24,7 @@ import { clone } from '../../services/storage';
  * Formularios dinamicos.
  */
 @Component({
-  selector: 'app-dynamic-form',
+  selector: 'dynamic-form',
   standalone: true,
   inputs: [
     {

@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
  * Botones dinamicos.
  */
 @Component({
-  selector: 'app-dynamic-button',
+  selector: 'dynamic-button',
   standalone: true,
   imports: [],
   inputs: [

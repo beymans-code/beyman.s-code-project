@@ -12,7 +12,7 @@ import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrollin
  * Tablas dinamicas.
  */
 @Component({
-  selector: 'app-dynamic-table',
+  selector: 'dynamic-table',
   standalone: true,
   imports: [CommonModule, ScrollingModule, DynamicFormComponent, DynamicCardComponent, DynamicButtonComponent],
   inputs: [

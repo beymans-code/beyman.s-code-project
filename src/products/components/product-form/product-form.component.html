@@ -1,10 +1,10 @@
-<app-dynamic-card class="product-form" [title]="'Formulario de registro'">
-    <app-dynamic-button actions icon="close" class="close-button" type="fab"
-        (action)="back()"></app-dynamic-button>
-    <app-dynamic-form content #formCreate [baseControls]="controls || []"></app-dynamic-form>
+<dynamic-card class="product-form" [title]="'Formulario de registro'">
+    <dynamic-button actions icon="close" class="close-button" type="fab"
+        (action)="back()"></dynamic-button>
+    <dynamic-form content #formCreate [baseControls]="controls || []"></dynamic-form>
     @if (this.formCreate.mode !== 'edit') {
-        <app-dynamic-button actions label="reiniciar" (action)="formCreate.formGroup.reset()"></app-dynamic-button>
+        <dynamic-button actions label="reiniciar" (action)="formCreate.formGroup.reset()"></dynamic-button>
     }
-    <app-dynamic-button actions color="dark" [label]="formCreate.mode === 'edit'? 'editar' : 'agregar'"
-        [disabled]="formCreate.formGroup.invalid" (action)="addData()"></app-dynamic-button>
-</app-dynamic-card>
+    <dynamic-button actions color="dark" [label]="formCreate.mode === 'edit'? 'editar' : 'agregar'"
+        [disabled]="formCreate.formGroup.invalid" (action)="addData()"></dynamic-button>
+</dynamic-card>

@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-
+export type TextAlign = 'left' | 'right' | 'center';
 /**
  * Componente de cards dinamicos.
  */
 @Component({
-  selector: 'app-dynamic-card',
+  selector: 'dynamic-card',
   standalone: true,
   imports: [],
   inputs: [
@@ -13,6 +13,12 @@ import { Component, Input } from '@angular/core';
     },
     {
       name: 'hideActions',
+    },
+    {
+      name: 'titleAlign',
+    },
+    {
+      name: 'contentAlign',
     }
   ],
   templateUrl: './dynamic-card.component.html',
@@ -24,6 +30,18 @@ export class DynamicCardComponent {
    */
   @Input()
   public title!: string;
+
+  /**
+ * Titulo del card.
+ */
+  @Input()
+  public titleAlign!: TextAlign;
+
+  /**
+  * Titulo del card.
+  */
+  @Input()
+  public contentAlign!: TextAlign;
 
   /**
    * Ocultar las acciones del card.

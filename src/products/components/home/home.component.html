@@ -1,23 +1,58 @@
 <div id="imageBackground1" class="row">
     <img id="imageBackground" [src]="homeCoverImage" alt="" />
 
-    <img id="beyman" src="assets/images/beyman1.png" alt="" />
-
-    <div class="col-sm-12 col-md-6">
-        <form action="#">
+    <div class="col-sm-12 col-md-6 d-flex justify-content-center align-items-center">
+        <form action="#" style="position: absolute; top: 0;">
             <input type="file" id="imgfile" (change)="setImage($event)" />
         </form>
+        <img id="beyman" src="assets/images/beyman1.png" alt="" />
     </div>
 
-    <div class="home-text col-sm-12 col-md-6 opaque primary">
-        <h1>¡Hola, Soy Beyman!</h1>
+    <div class="col-sm-12 col-md-6 d-flex py-4">
+        <div class="card m-auto h-fit-content home-text">
+            <!-- <div><h1 class="m-0" [innerHTML]="h1"></h1></div> -->
+            <h1 class="write">
+            </h1>
+            <p [innerHTML]="p"></p>
+            <input aria-label="Ask us anything">
+        </div>
+    </div>
+</div>
 
-        <p>
-            Un desarrollador Front End con
-            <b>6 años de experiencia</b> en la industria
-            creando aplicaciones <b>interactivas</b>,
-            con una <b>experiencia de usuario excepcional</b>
-            y <b>código de calidad</b>.
-        </p>
+
+
+<section>
+    <div class="row ">
+        <div class="col-sm-12 col-md-6 ">
+            <h1 class="body-title">Conocimientos</h1>
+
+            @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
+            <dynamic-card class="product-form" [title]="_skill.name" titleAlign="left">
+                <!-- <dynamic-button actions icon="close" class="close-button" type="fab"
+                        (action)="back()"></dynamic-button>
+                    <dynamic-form content #formCreate [baseControls]="controls || []"></dynamic-form>
+                    @if (this.formCreate.mode !== 'edit') {
+                        <dynamic-button actions label="reiniciar" (action)="formCreate.formGroup.reset()"></dynamic-button>
+                    }
+                    <dynamic-button actions color="dark" [label]="formCreate.mode === 'edit'? 'editar' : 'agregar'"
+                        [disabled]="formCreate.formGroup.invalid" (action)="addData()"></dynamic-button> -->
+
+                <ul content>
+                    @for (_item of _skill.list; track _item;) {
+                    <li>{{_item}}</li>
+                    }
+                </ul>
+            </dynamic-card>
+
+            }
+        </div>
+    </div>
+</section>
+
+
+
+<div class="row">
+    <div class="col-12">
+        <dynamic-divider></dynamic-divider>
     </div>
 </div>

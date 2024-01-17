@@ -5,7 +5,7 @@ table {
     border-color:  var(--outline);;
 }
 
-app-dynamic-table .cdk-virtual-scroll-content-wrapper::before {
+dynamic-table .cdk-virtual-scroll-content-wrapper::before {
     content: '';
     display: block;
     width: 100%;
@@ -36,7 +36,7 @@ thead tr {
     }
 }
 
-app-dynamic-table .card {
+dynamic-table .card {
     padding: 20px 10px !important;
 }
 
@@ -94,7 +94,7 @@ th.shadowLeft {
 }
 
 
-app-dynamic-table {
+dynamic-table {
     display: block;
     width: 100%;
 }

@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
  * Control de texto.
  */
 @Component({
-  selector: 'app-dynamic-control-text',
+  selector: 'dynamic-control-text',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './dynamic-control-text.component.html',

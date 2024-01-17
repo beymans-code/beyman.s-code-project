@@ -1,13 +1,13 @@
 @if (_tableConfig) {
 <div class="table-actions row justify-content-space-between">
-    <app-dynamic-form class="table-search col-sm-12 col-md-6" [baseControls]="controls || []" #searchForm
-        (formValue)="search($event)"></app-dynamic-form>
+    <dynamic-form class="table-search col-sm-12 col-md-6" [baseControls]="controls || []" #searchForm
+        (formValue)="search($event)"></dynamic-form>
     <div class="col-sm-12 col-md-6 d-flex   align-items-end justify-content-end">
-        <app-dynamic-button label="agregar" color="dark" (action)="add.emit()"></app-dynamic-button>
+        <dynamic-button label="agregar" color="dark" (action)="add.emit()"></dynamic-button>
     </div>
 </div>
 
-<app-dynamic-card [hideActions]="true">
+<dynamic-card [hideActions]="true">
     <cdk-virtual-scroll-viewport itemSize="50" content class="table-container" minBufferPx="300" maxBufferPx="500"
         [id]="'table-container' + _tableConfig.id" #container (scroll)="scroll()">
         <table>
@@ -51,21 +51,21 @@
             </tbody>
         </table>
     </cdk-virtual-scroll-viewport>
-</app-dynamic-card>
+</dynamic-card>
 } @else {
 Agrega la configuracion de la tabla.
 }
 
 <ng-template #buttons let-index='index'>
-    <app-dynamic-button actions icon="more_vert" type="fab" class="more"
-        (action)="currentEditRow = index"></app-dynamic-button>
+    <dynamic-button actions icon="more_vert" type="fab" class="more"
+        (action)="currentEditRow = index"></dynamic-button>
 
     @if(currentEditRow === index) {
     <div class="buttons-container card" [id]="'buttons-container'+ index" (focus)="currentEditRow = index;"
         (blur)="currentEditRow = undefined;">
-        <app-dynamic-button actions icon="edit" type="fab" (action)="startEditRow(index)"></app-dynamic-button>
-        <app-dynamic-button actions icon="delete" type="fab" (action)="delete(index)"></app-dynamic-button>
-        <app-dynamic-button actions icon="close" type="fab" (action)="closeMenu(index)"></app-dynamic-button>
+        <dynamic-button actions icon="edit" type="fab" (action)="startEditRow(index)"></dynamic-button>
+        <dynamic-button actions icon="delete" type="fab" (action)="delete(index)"></dynamic-button>
+        <dynamic-button actions icon="close" type="fab" (action)="closeMenu(index)"></dynamic-button>
     </div>
     }
 </ng-template>
