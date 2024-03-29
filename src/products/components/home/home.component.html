@@ -25,19 +25,21 @@
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
 
             <section #item>
-                @if (idx === 0 && visible === idx) {<h1 class="body-title">Conocimientos</h1>}
 
                 @if (visible === idx) {
-                <div class="d-sm-block d-md-block d-lg-none mobile-image-home" [style.opacity]="visible === idx? 1: 0"
-                    [style.height]="visible !== idx? '150px': 'unset'">
-                    <div class="image-home align-items-end" style="background-image: url({{_skill.imageUrl}});">
-                        <h4 class="card p-2 m-0 mb-3">{{_skill.name}}</h4>
-                    </div>
-                </div>
 
-                <h1 class="d-none d-sm-none d-md-none d-lg-block card p-2 m-0">{{_skill.name}}</h1>
 
                 <div class="row m-0 grid-cards" content>
+                    @if (idx === 0 && visible === idx) {<h1 class="body-title">Conocimientos</h1>}
+                    <div class="col-12">
+                        <div class="d-sm-block d-md-block d-lg-none mobile-image-home mb-3"
+                            [style.opacity]="visible === idx? 1: 0" [style.height]="visible !== idx? '150px': 'unset'">
+                            <div class="image-home align-items-end" style="background-image: url({{_skill.imageUrl}});">
+                                <h4 class="card p-2 m-0 mb-3">{{_skill.name}}</h4>
+                            </div>
+                        </div>
+                        <h1 class="d-none d-sm-none d-md-none d-lg-block card p-2 m-0 mb-3">{{_skill.name}}</h1>
+                    </div>
                     @for (_item of _skill.list; track _item;) {
                     <div class="col-6 col-sm-6 col-xl-6 p-0">
                         <dynamic-card [class]="'d-flex justify-content-left align-items-center px-0'">
