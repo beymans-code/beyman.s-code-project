@@ -4,12 +4,13 @@ button {
     padding: 22px;
     border: none;
     border-radius: 12px;
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-size: 16px;
     font-weight: 700;
     overflow: hidden;
     background: var(--primary);
     color: var(--onPrimary);
+    cursor: pointer;
 
 
     &.dark {

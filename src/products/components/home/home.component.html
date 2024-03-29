@@ -1,15 +1,13 @@
 <div id="imageBackground1" class="row">
     <img id="imageBackground" [src]="homeCoverImage" alt="" />
-
     <div class="col-sm-12 col-md-6 py-2 d-flex justify-content-center align-items-center beyman-container">
         <form action="#" style="position: absolute; top: 0;">
             <input type="file" id="imgfile" (change)="setImage($event)" />
         </form>
         <div id="beyman" class="triangle">
-            <img src="assets/images/beyman-min.png" alt="" />
+            <img src="assets/images/beyman.png" alt="" />
         </div>
     </div>
-
     <div class="col-sm-12 col-md-6 d-flex py-2">
         <div class="card m-auto h-fit-content home-text">
             <h1 class="mb-0">Hola, Soy Beyman</h1>
@@ -18,26 +16,27 @@
     </div>
 </div>
 
-
 <div class="container">
-    <div class="row ">
-        <div class="col-md-12 col-lg-6 mx-auto">
+    <div class="row">
+        <div class="col-12">
             <dynamic-divider></dynamic-divider>
             <h1 class="body-title">Conocimientos</h1>
             <dynamic-divider></dynamic-divider>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-md-12 col-lg-6 mx-auto">
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
-
             <section #item>
-
                 @if (visible === idx) {
-
-
                 <div class="row m-0 grid-cards" content>
-                    <!-- @if (idx === 0 && visible === idx) {<h1 class="body-title">Conocimientos</h1>} -->
                     <div class="col-12">
                         <div class="d-sm-block d-md-block d-lg-none mobile-image-home mb-3"
                             [style.opacity]="visible === idx? 1: 0" [style.height]="visible !== idx? '150px': 'unset'">
                             <div class="image-home align-items-end" style="background-image: url({{_skill.imageUrl}});">
+                                @if (_skill.thanksTo) { <dynamic-button [color]="'dark'" style="z-index: 3;"
+                                    type="default" [icon]="'link'" [label]="_skill.thanksToName"
+                                    (action)="goTo(_skill.thanksTo)"></dynamic-button>}
                                 <h4 class="card p-2 m-0 mb-3">{{_skill.name}}</h4>
                             </div>
                         </div>
@@ -68,10 +67,14 @@
 
         <div class="col-md-12 col-lg-6 d-none d-sm-none d-md-none d-lg-block">
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
-            <section class="image-home-section">
+            <section class="image-home-section" [style.transform]=" visible+1 === idx ? 'scale(1)': visible === idx? 'scale(0.9)': 'scale(0.8)' "
+                [style.pointer-events]="visible === idx || visible+1 === idx || visible-1 === idx? 'all': 'none'">
                 @if (visible === idx || visible+1 === idx || visible-1 === idx) {
                 <div class="image-home full" style="background-image: url({{_skill.imageUrl}});">
                     <!-- <h1 class="card p-2 m-0">{{_skill.name}}</h1> -->
+                    @if (_skill.thanksTo) { <dynamic-button [color]="'dark'" style="z-index: 3;" type="default"
+                        [icon]="'link'" [label]="_skill.thanksToName"
+                        (action)="goTo(_skill.thanksTo)"></dynamic-button>}
                 </div>
                 }
             </section>

@@ -5,13 +5,14 @@ import { DynamicDividerComponent } from '../../../dynamic-components/components/
 import { DynamicCardComponent } from '../../../dynamic-components/components/dynamic-card/dynamic-card.component';
 import { TypeIcon } from '../../../dynamic-components/models/dynamic-icon.models';
 import { DynamicIconComponent } from '../../../dynamic-components/components/dynamic-icon/dynamic-icon.component';
-import { CommonModule } from '@angular/common';
-
+import { DynamicButtonComponent } from '../../../dynamic-components/components/dynamic-button/dynamic-button.component';
 
 export interface SkillCategory {
   name: string,
   list: Skill[],
   imageUrl: string;
+  thanksTo?: string;
+  thanksToName?: string;
 }
 
 export interface Skill {
@@ -23,66 +24,60 @@ export interface Skill {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, DynamicDividerComponent, DynamicCardComponent, DynamicIconComponent],
+  imports: [DynamicDividerComponent, DynamicCardComponent, DynamicIconComponent, DynamicButtonComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
   public homeCoverImage: string = '';
-
-  public p = `Un desarrollador Front End con
-  <b>6 años de experiencia</b> en la industria
-  creando aplicaciones <b>interactivas</b>,
-  con una <b>experiencia de usuario excepcional</b>
-  y <b>código de calidad</b>.`
-
+  public p = `Desarrollador Front End con
+  <b>6 años de experiencia</b> creando aplicaciones <b>interactivas</b>  que combinan una <b>experiencia de usuario excepcional</b> con <b>código de alta calidad</b>.`
   public h1 = 'Hola, Soy Beyman.';
-
-  itemSize: number;
   visible: number;
+
 
   public skills: SkillCategory[] = [
     {
       name: 'Lenguajes de programación',
-      imageUrl: 'https://img.freepik.com/vector-gratis/ilustracion-concepto-gestion-oficina_114360-8811.jpg?t=st=1711667038~exp=1711670638~hmac=7bddfd0fae82a50c84c9e0e006184c627003fb8ed27b58ddcd94c24ce350410e&w=1380',
+      imageUrl: 'assets/images/home/0-min.jpg',
+      thanksTo: 'https://www.freepik.es/vector-gratis/ilustracion-concepto-abstracto-javascript_12290877.htm#query=code&position=0&from_view=author&uuid=9d37bb38-f9ab-48f7-a621-9b79bdcce398',
+      thanksToName: 'Créditos de la imagen @vectorjuice',
       list: [
-        { typeIcon: 'devicon', icon: 'devicon-java-plain-wordmark', description: 'Java' },
         { typeIcon: 'fa-brands', icon: 'fa-js', description: 'Javascript' },
         { typeIcon: 'fi', icon: 'fi-brands-typescript', description: 'TypeScript' },
-        { typeIcon: 'devicon', icon: 'devicon-php-plain', description: 'Php' },
+        { typeIcon: 'devicon', icon: 'devicon-java-plain-wordmark', description: 'Java' },
         { typeIcon: 'devicon', icon: 'devicon-azuresqldatabase-plain', description: 'SQL' },
+        { typeIcon: 'devicon', icon: 'devicon-php-plain', description: 'Php' },
       ]
     },
     {
-      name: 'Lenguajes diseño y marcado',
-      imageUrl: 'https://img.freepik.com/vector-gratis/ilustracion-concepto-programador_114360-2217.jpg?t=st=1711667109~exp=1711670709~hmac=0372ba4a09407474c23454d36200c6ea3ee5bea78c7588621c7c0c2f91ab4f0f&w=826',
-      list: [
-        { typeIcon: 'fa-brands', icon: 'fa-html5', description: 'Html' },
-        { typeIcon: 'fa-brands', icon: 'fa-css3-alt', description: 'Css' },
-        { typeIcon: 'devicon', icon: 'devicon-sass-original', description: 'Sass' },
-      ]
-    },
-    {
-      name: 'Frameworks de desarrollo',
-      imageUrl: 'https://img.freepik.com/vector-gratis/ilustracion-programacion-computadora-plana-organica_23-2148955255.jpg?t=st=1711667158~exp=1711670758~hmac=66b5acd21b0f2c3863b89ca403cf73ccaadedd0f824780b845717f038a9c696f&w=826',
+      name: 'Frameworks y Librerías',
+      imageUrl: 'assets/images/home/1-min.jpg',
+      thanksTo: 'https://www.freepik.es/vector-gratis/ilustracion-concepto-abstracto-marcos-multiplataforma-herramienta-construccion-programacion-marco-desarrollo-software-estructura-multiplataforma-interfaz-usuario-aplicacion-proceso-codificacion_10780411.htm#query=framework&position=1&from_view=author&uuid=fdfa28c3-760e-454b-bb98-955893b2b3fc',
+      thanksToName: 'Créditos de la imagen @vectorjuice',
       list: [
         { typeIcon: 'fa-brands', icon: 'fa-angular', description: 'Angular', },
-        { typeIcon: 'iconify', icon: 'iconify-jest', description: 'Jest', },
-        { typeIcon: 'iconify', icon: 'iconify-jasmine', description: 'Jasmine', },
         { typeIcon: 'iconify', icon: 'iconify-nx', description: 'Nx monorepo', },
+        { typeIcon: 'iconify', icon: 'iconify-jasmine', description: 'Jasmine', },
+        { typeIcon: 'iconify', icon: 'iconify-jest', description: 'Jest', },
         { typeIcon: 'devicon', icon: 'devicon-ngrx-plain', description: 'NgRx', },
         { typeIcon: 'devicon', icon: 'devicon-rxjs-plain', description: 'RxJs', },
         { typeIcon: 'iconify', icon: 'iconify-ionic', description: 'Ionic', },
         { typeIcon: 'iconify', icon: 'iconify-electron', description: 'Electron', },
-        { typeIcon: 'devicon', icon: 'devicon-wordpress-plain', description: 'WordPress', },
-        { typeIcon: 'devicon', icon: 'devicon-firebase-plain', description: 'Firebase' },
+        { typeIcon: 'devicon', icon: 'devicon-nodejs-plain-wordmark', description: 'Node.js' },
+        { typeIcon: 'devicon', icon: 'devicon-react-original', description: 'React', }
       ]
     },
     {
-      name: 'Frameworks de diseño',
-      imageUrl: 'https://img.freepik.com/vector-gratis/ilustracion-concepto-control-versiones_114360-1566.jpg?t=st=1711667182~exp=1711670782~hmac=ce94653122e315248df1135565cc965e23905292a94f6a74044314bdcedfef8b&w=826',
+      name: 'Diseño y maquetación',
+      imageUrl: 'assets/images/home/2-min.jpg',
+      thanksTo: 'https://www.freepik.es/vector-gratis/cursos-desarrolladores-web-estudio-programacion-informatica-diseno-web-guion-codificacion-componentes-estructura-interfaz-aprendizaje-estudiante-informatica_10783790.htm#query=web%20design&position=12&from_view=author&uuid=33149362-a705-4ace-afcb-dad5673a86d0',
+      thanksToName: 'Créditos de la imagen @vectorjuice',
       list: [
+        { typeIcon: 'fa-brands', icon: 'fa-html5', description: 'Html' },
+        { typeIcon: 'fa-brands', icon: 'fa-css3-alt', description: 'Css' },
+        { typeIcon: 'devicon', icon: 'devicon-sass-original', description: 'Sass' },
         { typeIcon: 'iconify', icon: 'iconify-material-design', description: 'Material Design' },
         { typeIcon: 'devicon', icon: 'devicon-bootstrap-plain', description: 'Bootstrap', },
         { typeIcon: 'devicon', icon: 'devicon-angularmaterial-plain', description: 'Angular material', },
@@ -90,11 +85,15 @@ export class HomeComponent {
       ]
     },
     {
-      name: 'Utilidades',
-      imageUrl: 'https://img.freepik.com/vector-gratis/ilustracion-concepto-mecanografia-codigo_114360-3866.jpg?t=st=1711667148~exp=1711670748~hmac=99c4667786439b2db141c63311d6b8fb626ceaf8c4af999d090a634e5e6088f9&w=1380',
+      name: 'Herramientas y utilidades',
+      imageUrl: 'assets/images/home/3-min.jpg',
+      thanksTo: 'https://www.freepik.es/vector-gratis/ilustracion-concepto-abstracto-herramientas-marketing-impulsadas-ai_12291062.htm#query=software%20tools&position=0&from_view=author&uuid=ad2e767e-208c-4a10-b29a-5f12a74fd3c5',
+      thanksToName: 'Créditos de la imagen @vectorjuice',
       list: [
         { typeIcon: 'devicon', icon: 'devicon-git-plain', description: 'Git' },
-        { typeIcon: 'devicon', icon: 'devicon-illustrator-plain', description: 'Adobe illustrator' }
+        { typeIcon: 'devicon', icon: 'devicon-illustrator-plain', description: 'Adobe illustrator' },
+        { typeIcon: 'devicon', icon: 'devicon-wordpress-plain', description: 'WordPress', },
+        { typeIcon: 'devicon', icon: 'devicon-firebase-plain', description: 'Firebase' },
       ]
     },
   ]
@@ -103,14 +102,18 @@ export class HomeComponent {
 
   constructor(public materialPaletteGeneratorService: MaterialPaletteGeneratorService) {
     this.homeCoverImage = defaultImage;
-    this.itemSize = document.documentElement.clientHeight
     this.visible = 0
-    console.log(this.itemSize);
   }
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
     this.checkVisibility();
+  }
+
+  goTo(url: string) {
+    console.log(url);
+
+    window.open(url, '_blank', 'noreferrer noopener');
   }
 
 

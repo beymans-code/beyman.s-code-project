@@ -1,7 +1,9 @@
-<button class="{{color || ''}} {{type || ''}} " [disabled]="disabled" (click)="action.emit()">
+<button class="d-flex justify-content-center align-items-center {{color || ''}} {{type || ''}} " [disabled]="disabled"
+    (click)="action.emit()">
     @if (label) {
-    <label>{{label}}</label>
-    } @else if (icon) {
-    <label class="icon">{{icon}}</label>
+    <label class="mx-1">{{label}}</label>
+    }
+    @if (icon) {
+    <label class="icon mx-1">{{icon}}</label>
     }
 </button>
