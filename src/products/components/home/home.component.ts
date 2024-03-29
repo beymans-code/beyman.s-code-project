@@ -101,10 +101,10 @@ export class HomeComponent {
     this.homeCoverImage = defaultImage;
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event: any) {
-    this.checkVisibility();
-  }
+  // @HostListener('window:scroll', ['$event'])
+  // onScroll(event: any) {
+  //   this.checkVisibility();
+  // }
 
 
   /**
@@ -120,19 +120,19 @@ export class HomeComponent {
     }
   }
 
-  checkVisibility() {
-    if (!this.items) return;
+  // checkVisibility() {
+    // if (!this.items) return;
 
-    this.items.forEach((item, i) => {
-      const element = item.nativeElement;
-      const rect = element.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    // this.items.forEach((item, i) => {
+    //   const element = item.nativeElement;
+    //   const rect = element.getBoundingClientRect();
+    //   const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
-      if (rect.top >= 0 && rect.bottom <= viewportHeight) {
-        console.log(`El elemento ${i} está completamente visible en el viewport.`);
-      }
-    });
-  }
+    //   if (rect.top >= 0 && rect.bottom <= viewportHeight) {
+    //     console.log(`El elemento ${i} está completamente visible en el viewport.`);
+    //   }
+    // });
+  // }
 
   public setImage(event: any) {
     const imgFile: any = document.getElementById('imageBackground');
@@ -155,7 +155,7 @@ export class HomeComponent {
   }
 
   public async generatePalette() {
-    this.materialPaletteGeneratorService.getImagePalette(!document.body.classList.contains('dark'));
+    this.materialPaletteGeneratorService.getImagePalette(document.body.classList.contains('dark'));
   }
 
 }

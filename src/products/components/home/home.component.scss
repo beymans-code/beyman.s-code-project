@@ -50,28 +50,6 @@
 }
 
 #imageBackground1 {
-    &::before {
-        content: '';
-        width: calc(100% + 30px);
-        height: 100%;
-        display: block;
-        position: absolute;
-        // background: var(--surfaceVariant);
-        left: -15px;
-        top: 0;
-        z-index: 0;
-        // opacity: 0.5;
-        // opacity: 1;
-        // background-image: radial-gradient(var(--primary) -42%, #ffffff6e 99%);
-        // background-position: 0 0;
-        // background-size: 2px 2px;
-        background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
-        // animation: animateGrain 8s steps(10) infinite;
-        height: 500%;
-        width: 500%;
-        opacity: 0.3;
-    }
-
     form {
         z-index: 3;
         position: relative;
@@ -103,13 +81,8 @@
         border-radius: 100%;
         padding: 0;
         z-index: 5;
-        background: var(--surfaceVariant);
-        color: var(--onSurface);
         position: relative;
         overflow: hidden;
-        // border-top-right-radius: 70%;
-        // border-bottom-left-radius: 40%;
-        // transform: rotate(-10deg);
         box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
 
         img {
@@ -218,27 +191,6 @@ section {
         // box-shadow: rgba(0, 0, 0, 0.183) 0px -32px 33px -36px;
         outline: solid 20px var(--background);
     }
-
-    &::before {
-        content: '';
-        height: 100%;
-        display: block;
-        position: absolute;
-        // background: var(--surfaceVariant);
-        left: -15px;
-        top: 0;
-        z-index: 0;
-        // opacity: 0.5;
-        // opacity: 1;
-        // background-image: radial-gradient(var(--primary) -42%, #ffffff6e 99%);
-        // background-position: 0 0;
-        // background-size: 2px 2px;
-        background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
-        // animation: animateGrain 8s steps(10) infinite;
-        height: 300%;
-        width: 300%;
-        opacity: 0.3;
-    }
 }
 
 .image-home-section {
@@ -269,5 +221,39 @@ section {
 
     #beyman {
         zoom: 0.75;
+    }
+}
+
+.image-home,
+#imageBackground1,
+#beyman,
+.home-text {
+    &::before {
+        content: '';
+        width: calc(100% + 30px);
+        height: 100%;
+        display: block;
+        position: absolute;
+        left: -15px;
+        top: 0;
+        z-index: 0;
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
+        // animation: animateGrain 8s steps(10) infinite;
+        height: 100%;
+        width: 110%;
+        opacity: 0.2;
+    }
+}
+
+
+#beyman,
+.home-text {
+    background: var(--background-opacity-500) !important;
+    color: var(--onSurface);
+    backdrop-filter: blur(50px) !important;
+
+    &::before {
+        z-index: -1;
+        opacity: 0.1;
     }
 }

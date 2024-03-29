@@ -54,6 +54,7 @@ export class MaterialPaletteGeneratorService {
     '--secundary-contrast-900',
     '--accent-contrast-900',
     '--warn-contrast-900',
+    'background',
   ];
 
   constructor() { }
@@ -222,6 +223,14 @@ export class MaterialPaletteGeneratorService {
       this.themeCssVariables[3],
       10,
       onError,
+      systemDark
+    );
+
+    this.generatePalette(
+      background,
+      this.themeCssVariables[8],
+      10,
+      onBackground,
       systemDark
     );
 
@@ -509,7 +518,7 @@ export class MaterialPaletteGeneratorService {
    * @param hex - Color hexadecimal.
    * @returns Array.
    */
-  private convertToRGB(hex: string) {    
+  private convertToRGB(hex: string) {
     const color = [];
     color[0] = parseInt(this.trim(hex).substring(0, 2), 16);
     color[1] = parseInt(this.trim(hex).substring(2, 4), 16);
