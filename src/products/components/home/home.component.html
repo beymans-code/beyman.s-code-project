@@ -12,23 +12,12 @@
 
     <div class="col-sm-12 col-md-6 d-flex py-4">
         <div class="card m-auto h-fit-content home-text">
-            <!-- <div><h1 class="m-0" [innerHTML]="h1"></h1></div> -->
             <h1 class="write">
             </h1>
             <p [innerHTML]="p"></p>
         </div>
     </div>
 </div>
-<!-- <div class="row">
-    <div class="col-sm-12 col-md-6 d-flex py-4">
-        <div class="card m-auto h-fit-content home-text">
-            <h1 class="write">
-            </h1>
-            <p [innerHTML]="p"></p>
-        </div>
-    </div>
-</div> -->
-
 
 
 <div class="container">
@@ -38,7 +27,6 @@
 
             <section #item>
                 @if (idx === 0) {<h1 class="body-title">Conocimientos</h1>}
-                
 
                 <div class=" d-md-block d-lg-none">
                     <div class="image-home" style="background-image: url({{_skill.imageUrl}});">
@@ -46,7 +34,6 @@
                     </div>
                 </div>
 
-                <!-- <dynamic-card class="product-form" [title]="_skill.name" titleAlign="left"> -->
                 <h1>{{_skill.name}}</h1>
 
                 <div class="row" content>
@@ -62,11 +49,13 @@
                     </div>
                     }
                 </div>
-                <!-- </dynamic-card> -->
             </section>
-            @if (idx < skills.length - 1) {<dynamic-divider></dynamic-divider>}
-                }
+            <ng-container>
+                @if (idx < skills.length - 1) {<dynamic-divider></dynamic-divider>}
+            </ng-container>
+            }
         </div>
+
         <div class="col-md-12 col-lg-6 d-md-none d-lg-block">
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
             <section class="image-home-section">
@@ -75,12 +64,6 @@
                 </div>
             </section>
             }
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-
         </div>
     </div>
 </div>
