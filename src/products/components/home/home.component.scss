@@ -259,8 +259,7 @@ section {
         left: -10px;
         top: 0;
         z-index: 0;
-        background-image: url('/assets/images/noise-min.png');
-        // animation: animateGrain 8s steps(10) infinite;
+        background-image: url(../../../assets/images/noise-min.png);
         height: 100%;
         width: calc(100% + 20px);
         opacity: 0.15;
