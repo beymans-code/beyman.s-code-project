@@ -25,19 +25,22 @@
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
 
             <section #item>
-                @if (idx === 0) {<h1 class="body-title">Conocimientos</h1>}
+                @if (idx === 0 && visible === idx) {<h1 class="body-title">Conocimientos</h1>}
 
-                <div class="d-sm-block d-md-block d-lg-none mobile-image-home">
+                <div class="d-sm-block d-md-block d-lg-none mobile-image-home" [style.opacity]="visible === idx? 1: 0"
+                    [style.height]="visible !== idx? '150px': 'unset'">
+                    @if (visible === idx) {
                     <div class="image-home align-items-end" style="background-image: url({{_skill.imageUrl}});">
                         <h4 class="card p-2 m-0 mb-3">{{_skill.name}}</h4>
                     </div>
+                    }
                 </div>
-
+                @if (visible === idx) {
                 <h1 class="d-none d-sm-none d-md-none d-lg-block card p-2 m-0 mb-3">{{_skill.name}}</h1>
 
-                <div class="row" content>
+                <div class="row m-0" content>
                     @for (_item of _skill.list; track _item;) {
-                    <div class="col-sm-12 col-xl-6 p-0">
+                    <div class="col-6 col-sm-6 col-xl-6 p-0">
                         <dynamic-card [class]="'d-flex justify-content-left align-items-center px-0'">
                             <div content class="d-flex justify-content-left align-items-center">
                                 <dynamic-icon class="m-2" [type]="_item.typeIcon" [icon]="_item.icon"
@@ -48,21 +51,25 @@
                     </div>
                     }
                 </div>
+                }
             </section>
             <ng-container>
                 <!-- @if (idx < skills.length - 1) { -->
-                    <dynamic-divider></dynamic-divider>
+                <dynamic-divider></dynamic-divider>
                 <!-- } -->
             </ng-container>
+
             }
         </div>
 
         <div class="col-md-12 col-lg-6 d-none d-sm-none d-md-none d-lg-block">
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
             <section class="image-home-section">
+                @if (visible === idx || visible+1 === idx || visible-1 === idx) {
                 <div class="image-home full" style="background-image: url({{_skill.imageUrl}});">
                     <!-- <h1 class="card p-2 m-0">{{_skill.name}}</h1> -->
                 </div>
+                }
             </section>
             }
         </div>

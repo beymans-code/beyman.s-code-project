@@ -5,6 +5,7 @@ import { DynamicDividerComponent } from '../../../dynamic-components/components/
 import { DynamicCardComponent } from '../../../dynamic-components/components/dynamic-card/dynamic-card.component';
 import { TypeIcon } from '../../../dynamic-components/models/dynamic-icon.models';
 import { DynamicIconComponent } from '../../../dynamic-components/components/dynamic-icon/dynamic-icon.component';
+import { CommonModule } from '@angular/common';
 
 
 export interface SkillCategory {
@@ -22,7 +23,7 @@ export interface Skill {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [DynamicDividerComponent, DynamicCardComponent, DynamicIconComponent],
+  imports: [CommonModule, DynamicDividerComponent, DynamicCardComponent, DynamicIconComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -37,6 +38,9 @@ export class HomeComponent {
   y <b>código de calidad</b>.`
 
   public h1 = 'Hola, Soy Beyman.';
+
+  itemSize: number;
+  visible: number;
 
   public skills: SkillCategory[] = [
     {
@@ -99,12 +103,15 @@ export class HomeComponent {
 
   constructor(public materialPaletteGeneratorService: MaterialPaletteGeneratorService) {
     this.homeCoverImage = defaultImage;
+    this.itemSize = document.documentElement.clientHeight
+    this.visible = 0
+    console.log(this.itemSize);
   }
 
-  // @HostListener('window:scroll', ['$event'])
-  // onScroll(event: any) {
-  //   this.checkVisibility();
-  // }
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    this.checkVisibility();
+  }
 
 
   /**
@@ -120,19 +127,20 @@ export class HomeComponent {
     }
   }
 
-  // checkVisibility() {
-    // if (!this.items) return;
+  checkVisibility() {
+    if (!this.items) return;
 
-    // this.items.forEach((item, i) => {
-    //   const element = item.nativeElement;
-    //   const rect = element.getBoundingClientRect();
-    //   const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    this.items.forEach((item, i) => {
+      const element = item.nativeElement;
+      const rect = element.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
-    //   if (rect.top >= 0 && rect.bottom <= viewportHeight) {
-    //     console.log(`El elemento ${i} está completamente visible en el viewport.`);
-    //   }
-    // });
-  // }
+      if (rect.top >= 0 && rect.bottom <= viewportHeight + 100) {
+        console.log(`El elemento ${i} está completamente visible en el viewport.`);
+        this.visible = i;
+      }
+    });
+  }
 
   public setImage(event: any) {
     const imgFile: any = document.getElementById('imageBackground');
