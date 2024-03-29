@@ -248,3 +248,26 @@ section {
     margin: auto;
     z-index: 6;
 }
+
+
+@media screen and (max-width: 1000px) {
+    #imageBackground1>div {
+        zoom: 0.85;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    #imageBackground1>div {
+        zoom: 0.75;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #imageBackground1>div {
+        zoom: 0.7;
+    }
+
+    #beyman {
+        zoom: 0.75;
+    }
+}
