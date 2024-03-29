@@ -113,7 +113,7 @@ section {
 
     >*,
     .image-home:not(.full) {
-        animation: slide-up-show 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+        animation: slide-up-show 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     }
 }
 
@@ -181,6 +181,10 @@ section {
     font-size: 57px;
 }
 
+.grid-cards {
+    padding-top: 20px;
+}
+
 @media screen and (max-width: 1000px) {
     #imageBackground1>div {
         zoom: 0.85;
@@ -198,6 +202,8 @@ section {
 }
 
 @media screen and (max-width: 500px) {
+
+    .grid-cards,
     #imageBackground1>div {
         zoom: 0.7;
     }
@@ -206,6 +212,7 @@ section {
     .body-title {
         zoom: 0.75;
     }
+
 }
 
 @media screen and (max-width: 380px) {
