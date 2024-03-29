@@ -15,7 +15,7 @@ import { getItem } from '../dynamic-components/services/storage';
 })
 export class AppComponent {
   title = 'beyman.s-code-project';
-
+  opacity = 0
 
   constructor(public materialPaletteGeneratorService: MaterialPaletteGeneratorService) { }
 
@@ -23,11 +23,12 @@ export class AppComponent {
    * Se ejecuta al renderizar el componente.
    */
   public ngAfterViewInit(): void {
-    // setTimeout(() => {
+
+    setTimeout(() => {
       if (typeof document !== 'undefined') {
         this.materialPaletteGeneratorService.getImagePalette();
       }
-    // }, 1000);
+    }, 1000);
   }
 
   public toggleDark() {

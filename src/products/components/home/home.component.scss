@@ -163,10 +163,6 @@ section {
     min-height: 100vh;
 }
 
-.body-title {
-    font-size: 57px;
-}
-
 .write::after {
     padding-right: 0px !important;
     border-right: 4px solid currentColor;
@@ -179,13 +175,22 @@ section {
 
 .image-home {
     width: 100%;
-    height: 300px;
+    height: 150px;
     background-position: center;
     background-size: cover;
-    margin: 8px 0;
+    margin: 20px 0;
     border-radius: 40px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--background);
+
+    .card {
+        width: calc(100% - 45px);
+        text-align: center;
+    }
 
     &.full {
         height: 100vh;
@@ -202,6 +207,24 @@ section {
     z-index: 6;
 }
 
+.mobile-image-home {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    &::before {
+        content: '';
+        height: 50px;
+        width: calc(100% + 10px);
+        left: -5px;
+        background: var(--background);
+        display: block;
+        position: absolute;
+    }
+}
+
+.body-title {
+    font-size: 57px;
+}
 
 @media screen and (max-width: 1000px) {
     #imageBackground1>div {
@@ -213,15 +236,26 @@ section {
     #imageBackground1>div {
         zoom: 0.75;
     }
+
+    .body-title {
+        zoom: 0.9;
+    }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
     #imageBackground1>div {
         zoom: 0.7;
     }
 
-    #beyman {
+    #beyman,
+    .body-title {
         zoom: 0.75;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .body-title {
+        zoom: 0.6;
     }
 }
 
@@ -231,17 +265,16 @@ section {
 .home-text {
     &::before {
         content: '';
-        width: calc(100% + 30px);
         height: 100%;
         display: block;
         position: absolute;
-        left: -15px;
+        left: -10px;
         top: 0;
         z-index: 0;
-        background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
+        background-image: url(https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png);
         // animation: animateGrain 8s steps(10) infinite;
         height: 100%;
-        width: 110%;
+        width: calc(100% + 20px);
         opacity: 0.2;
     }
 }

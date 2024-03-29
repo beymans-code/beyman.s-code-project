@@ -234,6 +234,8 @@ export class MaterialPaletteGeneratorService {
       systemDark
     );
 
+    document.body.classList.add('loaded');
+
     // Apply the theme to the body by updating custom properties for material tokens
     // applyTheme(theme, { target: document.body, dark: systemDark });
   }
