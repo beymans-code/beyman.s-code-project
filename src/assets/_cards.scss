@@ -2,7 +2,7 @@
     padding: 24px;
     background: var(--surfaceVariant);
     color: var(--onSurface);
-    border-radius: 25px;
+    border-radius: 30px;
     overflow-x: hidden;
     margin: 20px 20px 35px 20px;
     // box-shadow: 0px 0px 33px -20px rgba(0, 0, 0, 0.27);
@@ -206,4 +206,8 @@
             // background: var(--primary-opacity-100);
         }
     }
+}
+
+dynamic-card {
+    display: contents !important;
 }

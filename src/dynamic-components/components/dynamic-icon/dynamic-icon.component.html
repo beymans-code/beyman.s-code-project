@@ -1,0 +1,5 @@
+@if (type === "material-icons") {
+<label class="icon {{class || ''}} d-flex justify-content-center align-items-center" [style]="styles">{{icon}}</label>
+} @else {
+<i class="{{type}} {{icon}} {{class || ''}} d-flex justify-content-center align-items-center" [style]="styles"></i>
+}

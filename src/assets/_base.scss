@@ -56,9 +56,9 @@ router-outlet~* {
     padding: 10px;
 }
 
-body.dark #imageBackground1::before {
-    background: #00000082 !important;
-}
+// body.dark #imageBackground1::before {
+//     background: #00000082 !important;
+// }
 
 @keyframes show {
     0% {
@@ -79,5 +79,12 @@ body.dark #imageBackground1::before {
     100% {
         opacity: 1;
         transform: translateY(0) scale(1);
+    }
+}
+
+dynamic-card {
+    .card {
+        padding: 0 24px;
+        margin: 10px;
     }
 }

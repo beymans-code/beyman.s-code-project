@@ -1,0 +1,1 @@
+export type TypeIcon = 'material-icons' | 'fa-solid' | 'fa-brands' | 'fi' | 'iconify' | 'devicon';

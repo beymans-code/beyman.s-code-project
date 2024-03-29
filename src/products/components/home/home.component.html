@@ -5,7 +5,9 @@
         <form action="#" style="position: absolute; top: 0;">
             <input type="file" id="imgfile" (change)="setImage($event)" />
         </form>
-        <img id="beyman" src="assets/images/beyman1.png" alt="" />
+        <div id="beyman" class="triangle">
+            <img src="assets/images/beyman.png" alt="" />
+        </div>
     </div>
 
     <div class="col-sm-12 col-md-6 d-flex py-4">
@@ -14,45 +16,71 @@
             <h1 class="write">
             </h1>
             <p [innerHTML]="p"></p>
-            <input aria-label="Ask us anything">
         </div>
     </div>
 </div>
+<!-- <div class="row">
+    <div class="col-sm-12 col-md-6 d-flex py-4">
+        <div class="card m-auto h-fit-content home-text">
+            <h1 class="write">
+            </h1>
+            <p [innerHTML]="p"></p>
+        </div>
+    </div>
+</div> -->
 
 
 
-<section>
+<div class="container">
     <div class="row ">
-        <div class="col-sm-12 col-md-6 ">
-            <h1 class="body-title">Conocimientos</h1>
-
+        <div class="col-md-12 col-lg-6 mx-auto" style="max-width: 600px;">
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
-            <dynamic-card class="product-form" [title]="_skill.name" titleAlign="left">
-                <!-- <dynamic-button actions icon="close" class="close-button" type="fab"
-                        (action)="back()"></dynamic-button>
-                    <dynamic-form content #formCreate [baseControls]="controls || []"></dynamic-form>
-                    @if (this.formCreate.mode !== 'edit') {
-                        <dynamic-button actions label="reiniciar" (action)="formCreate.formGroup.reset()"></dynamic-button>
-                    }
-                    <dynamic-button actions color="dark" [label]="formCreate.mode === 'edit'? 'editar' : 'agregar'"
-                        [disabled]="formCreate.formGroup.invalid" (action)="addData()"></dynamic-button> -->
 
-                <ul content>
+            <section #item>
+                @if (idx === 0) {<h1 class="body-title">Conocimientos</h1>}
+                
+
+                <div class=" d-md-block d-lg-none">
+                    <div class="image-home" style="background-image: url({{_skill.imageUrl}});">
+                        <div></div>
+                    </div>
+                </div>
+
+                <!-- <dynamic-card class="product-form" [title]="_skill.name" titleAlign="left"> -->
+                <h1>{{_skill.name}}</h1>
+
+                <div class="row" content>
                     @for (_item of _skill.list; track _item;) {
-                    <li>{{_item}}</li>
+                    <div class="col-sm-12 col-xl-6 p-0">
+                        <dynamic-card [class]="'d-flex justify-content-left align-items-center px-0'">
+                            <div content class="d-flex justify-content-left align-items-center">
+                                <dynamic-icon class="m-2" [type]="_item.typeIcon" [icon]="_item.icon"
+                                    [size]="40"></dynamic-icon>
+                                <h4>{{_item.description}}</h4>
+                            </div>
+                        </dynamic-card>
+                    </div>
                     }
-                </ul>
-            </dynamic-card>
-
+                </div>
+                <!-- </dynamic-card> -->
+            </section>
+            @if (idx < skills.length - 1) {<dynamic-divider></dynamic-divider>}
+                }
+        </div>
+        <div class="col-md-12 col-lg-6 d-md-none d-lg-block">
+            @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
+            <section class="image-home-section">
+                <div class="image-home full" style="background-image: url({{_skill.imageUrl}});">
+                    <div></div>
+                </div>
+            </section>
             }
         </div>
     </div>
-</section>
 
+    <div class="row">
+        <div class="col-12">
 
-
-<div class="row">
-    <div class="col-12">
-        <dynamic-divider></dynamic-divider>
+        </div>
     </div>
 </div>

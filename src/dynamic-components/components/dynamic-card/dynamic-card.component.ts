@@ -19,6 +19,9 @@ export type TextAlign = 'left' | 'right' | 'center';
     },
     {
       name: 'contentAlign',
+    },
+    {
+      name: 'class',
     }
   ],
   templateUrl: './dynamic-card.component.html',
@@ -48,4 +51,10 @@ export class DynamicCardComponent {
    */
   @Input()
   public hideActions!: boolean;
+
+    /**
+   * Ocultar las acciones del card.
+   */
+    @Input()
+    public class!: string;
 }
