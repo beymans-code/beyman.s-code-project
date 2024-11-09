@@ -65,6 +65,18 @@ router-outlet~* {
     margin: auto;
 }
 
+@media screen and (max-width: 500px) {
+    router-outlet~* {
+        width: calc(100vw - 40px);
+    }
+}
+
+@media screen and (max-width: 380px) {
+    router-outlet~* {
+        width: calc(100vw - 35px);
+    }
+}
+
 // body.dark #imageBackground1::before {
 //     background: #00000082 !important;
 // }

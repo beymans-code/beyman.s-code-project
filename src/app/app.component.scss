@@ -1,5 +1,13 @@
 .dark-button {
-    position: fixed;
+    position: absolute;
     bottom: 18px;
     z-index: 500;
+    top: 52px;
+    right: 35px;
+}
+
+@media (pointer:coarse) {
+    .dark-button {
+        right: 46px !important;
+    }
 }

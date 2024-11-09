@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { ProductTableComponent } from '../products/components/product-table/product-table.component';
-import { ProductFormComponent } from '../products/components/product-form/product-form.component';
-import { HomeComponent } from '../products/components/home/home.component';
+import { ProductTableComponent } from '../landing/components/product-table/product-table.component';
+import { ProductFormComponent } from '../landing/components/product-form/product-form.component';
+import { HomeComponent } from '../landing/components/home/home.component';
 
 /**
  * Rutas de la aplicacion.
