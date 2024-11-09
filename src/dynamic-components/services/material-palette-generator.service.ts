@@ -57,6 +57,10 @@ export class MaterialPaletteGeneratorService {
     'background',
   ];
 
+
+  background: string = '';
+  isDark: boolean = true;
+
   constructor() { }
 
   /**
@@ -126,8 +130,10 @@ export class MaterialPaletteGeneratorService {
 
   public changeTheme(theme: Theme, systemDark: boolean) {
     if (systemDark) {
+      this.isDark = true;
       document.body.classList.add('dark');
     } else {
+      this.isDark = false;
       document.body.classList.remove('dark');
     }
 
@@ -152,6 +158,7 @@ export class MaterialPaletteGeneratorService {
     const errorContainer = hexFromArgb(scheme.errorContainer);
     const onErrorContainer = hexFromArgb(scheme.onErrorContainer);
     const background = hexFromArgb(scheme.background);
+    this.background = background;
     const onBackground = hexFromArgb(scheme.onBackground);
     const surface = hexFromArgb(scheme.surface);
     const onSurface = hexFromArgb(scheme.onSurface);

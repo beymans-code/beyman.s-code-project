@@ -37,7 +37,7 @@ export class HomeComponent {
   public h1 = '¡Hola! Soy Beyman.';
   visible: number;
   isMobile: boolean = false;
-  opacity = '0'
+  observer: IntersectionObserver | null = null;
 
   public skills: ListCard[] = [
     {
@@ -118,18 +118,29 @@ export class HomeComponent {
 
   ]
 
-  @ViewChildren('item') items!: QueryList<ElementRef>;
   @ViewChildren('image') images!: QueryList<ElementRef>;
+  @ViewChildren('mobileSection') mobileSections!: QueryList<ElementRef>;
 
   constructor(public materialPaletteGeneratorService: MaterialPaletteGeneratorService, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object) {
     this.homeCoverImage = defaultImage;
     this.visible = 0
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event: any) {
-    if (window !== undefined) this.isMobile = (window.innerWidth <= 991)
-    if (!this.isMobile) this.checkVisibility();
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isMobile = window.innerWidth < 992;
+      window.addEventListener('resize', this.onResize.bind(this));
+    }
+  }
+
+  onResize() {
+    if (isPlatformBrowser(this.platformId)) {
+      const nuevaVista = window.innerWidth < 992;
+      if (nuevaVista !== this.isMobile) {
+        this.isMobile = nuevaVista;
+      }
+      this.observarElementos();
+    }
   }
 
   goTo(url: string) {
@@ -151,8 +162,7 @@ export class HomeComponent {
     }
     if (isPlatformBrowser(this.platformId)) {
       this.crearObservador();
-    } else {
-      console.warn('Este código solo se ejecuta en el navegador.');
+      this.observarElementos();
     }
   }
 
@@ -161,55 +171,56 @@ export class HomeComponent {
       root: null,
       threshold: Array.from({ length: 11 }, (_, i) => i / 10) // Umbrales de 0% a 100%
     };
+    let elementoVisible: ElementRef | null = null;
+    this.observer = new IntersectionObserver((entradas) => {
 
-    const observador = new IntersectionObserver((entradas) => {
       entradas.forEach((entrada, i) => {
-        // Encuentra el índice del elemento actual en la lista de imágenes
-        const index = this.images.toArray().findIndex(el => el.nativeElement === entrada.target);
+        const targetArray = this.isMobile ? this.mobileSections : this.images;
 
-        // Si hay un elemento anterior, aplica la opacidad calculada
+        const index = targetArray.toArray().findIndex(el => el.nativeElement === entrada.target);
+
         if (index > 0) {
-          const elementoAnterior = this.images.toArray()[index - 1];
+          const elementoAnterior = targetArray.toArray()[index - 1];
           const opacidad = (1 - entrada.intersectionRatio).toFixed(1); // Calcula opacidad invertida
-          elementoAnterior.nativeElement.style.opacity = opacidad === '0.1'? '0' : opacidad;
-          elementoAnterior.nativeElement.style.transform = `scale(0.9${opacidad.replace('0.', '')})`;
+          const desplazamientoMaximo = elementoAnterior.nativeElement.offsetHeight;
+
+          elementoAnterior.nativeElement.style.opacity = opacidad === '0.1' ? '0' : opacidad;
+          if (entrada.intersectionRatio === 0) {
+            // Resetear desplazamiento cuando el elemento sale completamente del viewport
+            elementoAnterior.nativeElement.style.transform = 'translateY(0) scale(1)';
+          } else {
+            const desplazamientoY = desplazamientoMaximo * entrada.intersectionRatio;
+            elementoAnterior.nativeElement.style.transform = `translateY(${desplazamientoY}px) scale(0.9${opacidad.replace('0.', '')})`;
+          }
         }
 
-        // if (i === 0) {
-        //   const elemento = this.images.find(el => el.nativeElement === entrada.target);
-        //   if (elemento) {
-        //     elemento.nativeElement.style.opacity = entrada.intersectionRatio;
-        //   }
-        // }
+
+        if (entrada.intersectionRatio > 0.5) {
+          elementoVisible = targetArray.toArray()[index];
+          this.visible = index;
+        } else if (elementoVisible?.nativeElement === entrada.target && entrada.intersectionRatio <= 0.5) {
+          this.visible = targetArray.length - 1;
+        }
+
+        if (index === targetArray.length - 1) {
+          const ultimoElemento = targetArray.toArray()[index];
+          const opacidad = 1 - entrada.intersectionRatio;
+          ultimoElemento.nativeElement.style.opacity = opacidad;
+          ultimoElemento.nativeElement.style.transform = 'translateY(0)';
+        }
       });
     }, opciones);
-
-    // Observa cada elemento en la lista
-    this.images.forEach((elemento) => {
-      observador.observe(elemento.nativeElement);
-    });
-
-
   }
 
-  checkVisibility() {
-    if (!this.items) return;
-    this.items.forEach((item, i) => {
-      const element = item.nativeElement;
-      const rect = element.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-      if (rect.top >= 0 && rect.bottom <= viewportHeight + 100 && this.visible !== i) {
-        console.log(`El elemento ${i} está completamente visible en el viewport.`);
-        this.visible = i;
-      }
+  observarElementos() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+
+    const elementos = this.isMobile ? this.mobileSections : this.images;
+    elementos.forEach((elemento) => {
+      this.observer?.observe(elemento.nativeElement);
     });
-    // const _rect = this.items.get(this.visible)?.nativeElement?.getBoundingClientRect();
-    // const position = `${_rect.top.toFixed(0)}`
-    // const _position = position.includes('-') ? position.replace('-', '') : `${position}`
-    // this.opacity = _position.split('')[0]
-    // // if (!_position.includes('-')) {
-    //   console.log('Visible ', this.visible, ' ', this.opacity);
-    // // }
   }
 
   public setImage(event: any) {

@@ -18,67 +18,47 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12">
-            <dynamic-divider></dynamic-divider>
+        <div class="col-12" [style.padding]="isMobile? '0 37px !important' : 'initial'">
+            <dynamic-divider class="headerDividers"></dynamic-divider>
             <h1 class="body-title">Conocimientos</h1>
-            <dynamic-divider></dynamic-divider>
+            <dynamic-divider class="headerDividers"></dynamic-divider>
         </div>
     </div>
     <div class="row ">
-        <div class="col-md-12 col-lg-6 mx-auto">
+        <div class="col-md-12 col-lg-6 mx-auto" style="position: relative;">
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
-            <section #item>
-                @if (!isMobile) {
-                    @if (visible === idx || visible+1 === idx || visible-1 === idx) {
-                    <ng-container *ngTemplateOutlet="cardSkills; context: { idx: idx, _skill: _skill }"></ng-container>
-                    }
-                } @else {
-                    <ng-container *ngTemplateOutlet="cardSkills; context: { idx: idx, _skill: _skill }"></ng-container>
-                }
+            <section #item [class.isMobile]="isMobile">
+                <ng-container *ngTemplateOutlet="cardSkills; context: { idx: idx, _skill: _skill, last: idx === (skills.length -1)  }"></ng-container>
             </section>
             <ng-container>
-                <!-- @if (idx < skills.length - 1) { -->
+                @if (!isMobile) {
                 <dynamic-divider></dynamic-divider>
-                <!-- } -->
+                }
             </ng-container>
-
             }
         </div>
 
         <div class="col-md-12 col-lg-6 d-none d-sm-none d-md-none d-lg-block">
             @for (_skill of skills; track _skill.name; let idx = $index, e = $even) {
-            <section #image class="image-home-section"
+            <section #image class="image-home-section" [class.last]="idx === (skills.length -1)"
                 [style.pointer-events]="visible === idx || visible+1 === idx || visible-1 === idx? 'all': 'none'">
-                @if (visible === idx || visible+1 === idx || visible-1 === idx) {
-                <div class="image-home full" style="background-image: url({{_skill.imageUrl}});">
-                    <!-- <h1 class="card p-2 m-0">{{_skill.name}}</h1> -->
-                    @if (_skill.thanksTo) { <dynamic-button [color]="'dark'" style="z-index: 3;" type="default"
-                        [icon]="'link'" [label]="_skill.thanksToName"
-                        (action)="goTo(_skill.thanksTo)"></dynamic-button>}
-                </div>
-                }
+                <!-- @if (visible === idx || visible+1 === idx || visible-1 === idx) { -->
+                <ng-container
+                    *ngTemplateOutlet="cardSkillsImage; context: { _skill: _skill, class: 'full' }"></ng-container>
+                <!-- } -->
             </section>
             }
         </div>
     </div>
 </div>
 
-<ng-template #cardSkills let-_skill="_skill" let-idx="idx">
+<ng-template #cardSkills let-_skill="_skill" let-idx="idx" let-last="last">
+
+    @if (!isMobile) {
     <div class="row m-0 grid-cards" content>
         <div class="col-12">
-            @if (!isMobile) {
-                <div class="d-sm-block d-md-block d-lg-none mobile-image-home mb-3"
-                    [style.opacity]="visible === idx || visible+1 === idx || visible-1 === idx? 1: 0"
-                    [style.height]="visible !== idx && visible+1 !== idx && visible-1 !== idx? '150px': 'unset'">
-                    <ng-container *ngTemplateOutlet="cardSkillsImage; context: { _skill: _skill }"></ng-container>
-                </div>
-            } @else {
-                <div class="d-sm-block d-md-block d-lg-none mobile-image-home mb-3" style="opacity: 1; height: 150px;">
-                    <ng-container *ngTemplateOutlet="cardSkillsImage; context: { _skill: _skill }"></ng-container>
-                </div>
-            }
-            <h1 class="card p-4 m-0 mb-3" style="z-index: 10;" [style.margin-top]=" isMobile? '100px !important': 'unset'">{{_skill.name}}
-
+            <h1 class="card p-4 m-0 mb-3" style="z-index: 10;"
+                [style.margin-top]=" isMobile? '100px !important': 'unset'">{{_skill.name}}
                 <p style="font-size: 17px;margin: 5px 0 0 0;">
                     {{_skill.description}}
                 </p>
@@ -89,8 +69,8 @@
             <dynamic-card [class]="'d-flex justify-content-left align-items-center px-0'">
                 <div content class="d-flex justify-content-left align-items-center">
                     @if (_item.icon) {
-                        <dynamic-icon class="m-2 my-3" [type]="_item.typeIcon" [icon]="_item.icon"
-                            [size]="40"></dynamic-icon>
+                    <dynamic-icon class="m-2 my-3" [type]="_item.typeIcon" [icon]="_item.icon"
+                        [size]="40"></dynamic-icon>
                     }
                     <h4>{{_item.description}}</h4>
                 </div>
@@ -98,13 +78,47 @@
         </div>
         }
     </div>
+    } @else {
+        <div class="row m-0 grid-cards mobileSection" content #mobileSection [class.last]="last">
+        @if (idx > 0) {
+            <dynamic-divider class="mobileDivider"></dynamic-divider>
+        }
+        <div class="row m-auto mt-0" style="transform: translateY(-90px);">
+            <div class="col-12">
+                <div class="d-sm-block d-md-block d-lg-none mobile-image-home mb-3" style="opacity: 1; height: 150px;">
+                    <ng-container
+                        *ngTemplateOutlet="cardSkillsImage; context: { _skill: _skill, class: 'align-items-end' }"></ng-container>
+                </div>
+                <h1 class="card p-4 m-0 mb-3" style="z-index: 10;"
+                    [style.margin-top]=" isMobile? '100px !important': 'unset'">{{_skill.name}}
+                    <p style="font-size: 17px;margin: 5px 0 0 0;">
+                        {{_skill.description}}
+                    </p>
+                </h1>
+            </div>
+            @for (_item of _skill.list; track _item;) {
+            <div class="col-6 col-sm-6 col-xl-6 p-0">
+                <dynamic-card [class]="'d-flex justify-content-left align-items-center px-0'">
+                    <div content class="d-flex justify-content-left align-items-center">
+                        @if (_item.icon) {
+                        <dynamic-icon class="m-2" style="margin: 18px 5px !important;" [type]="_item.typeIcon" [icon]="_item.icon"
+                            [size]="40"></dynamic-icon>
+                        }
+                        <h4>{{_item.description}}</h4>
+                    </div>
+                </dynamic-card>
+            </div>
+            }
+        </div>
+    </div>
+    }
+
 </ng-template>
 
-<ng-template #cardSkillsImage let-_skill="_skill">
-    <div class="image-home align-items-end" style="background-image: url({{_skill.imageUrl}});">
-        @if (_skill.thanksTo) { <dynamic-button [color]="'dark'" style="z-index: 3;"
-            type="default" [icon]="'link'" [label]="_skill.thanksToName"
-            (action)="goTo(_skill.thanksTo)"></dynamic-button>}
+<ng-template #cardSkillsImage let-_skill="_skill" let-class="class">
+    <div class="image-home {{class}}" style="background-image: url({{_skill.imageUrl}});">
+        @if (_skill.thanksTo) { <dynamic-button [color]="'dark'" style="z-index: 3;" type="default" [icon]="'link'"
+            [label]="_skill.thanksToName" (action)="goTo(_skill.thanksTo)"></dynamic-button>}
     </div>
 </ng-template>
 

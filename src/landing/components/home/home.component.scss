@@ -109,7 +109,15 @@ section {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    min-height: 100vh;
+    // min-height: 100vh;
+    height: 100vh;
+    min-height: 700px;
+    & ~ dynamic-divider {
+        position: absolute;
+        transform: translateY(6px);
+        z-index: 1;
+        border-bottom: solid 11px var(--background);
+    }
 }
 
 @media screen and (max-width: 991px) {
@@ -144,7 +152,7 @@ section {
     height: 200px;
     background-position: center;
     background-size: cover;
-    margin: 20px 0 40px 0px;
+    margin: 40px 0 40px 0px;
     border-radius: 40px;
     position: relative;
     overflow: hidden;
@@ -176,7 +184,7 @@ section {
     }
 
     &.full {
-        height: calc(100vh - 40px);
+        height: 100%;
         // outline: solid 20px var(--background);
         box-shadow: 0px 0px 90px 0px var(--background);
     }
@@ -184,23 +192,25 @@ section {
 
 .image-home-section {
     transition: all 900ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s !important;
-    position: sticky;
-    top: 20px;
-    bottom: 20px;
+    // position: sticky;
+    position: relative;
+    top: 10px;
+    bottom: 0px;
     margin: auto;
     z-index: 0;
 
     &::after {
         content: "";
         position: absolute;
-        top: 20px;
+        top: 0;
         left: 0;
         width: 100%;
-        height: calc(100% - 60px);
+        height: calc(100% - 80px);
         background: var(--primaryContainer);
         opacity: 0.2;
         border-radius: 38px;
         pointer-events: none;
+        margin: 40px 0 40px 0px;
     }
 }
 
@@ -269,7 +279,7 @@ section {
 @media screen and (max-width: 500px) {
 
     .grid-cards,
-    #imageBackground1>div {
+    #imageBackground1>div, .headerDividers {
         zoom: 0.7;
     }
 
@@ -351,13 +361,29 @@ section {
     }
 }
 
-.image-home-section {
+.image-home-section, .mobileSection {
     transition: all 0.5s ease;
     opacity: 0;
+    transform: translateY(0px);
+    /* Posición inicial sin desplazamiento */
 
-    &:last-of-type {
+    &.last {
         opacity: 1 !important;
     }
+}
+
+.mobileSection {
+    background: var(--background);
+    // box-shadow: 0px 0px 90px 0px var(--background);
+    height: calc(100% - 60px);
+}
+
+.mobileDivider {
+    z-index: 1;
+    border-bottom: solid 10px var(--background);
+    transform: translateY(-36px);
+    margin: 0 !important;
+    height: fit-content !important;
 }
 
 .zoom {
@@ -366,7 +392,7 @@ section {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    animation: scaleBackground 150s linear infinite;
+    animation: scaleBackground 50s linear infinite;
 }
 
 @keyframes scaleBackground {

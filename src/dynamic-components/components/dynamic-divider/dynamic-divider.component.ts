@@ -1,21 +1,37 @@
 import { Component } from '@angular/core';
+import { MaterialPaletteGeneratorService } from '../../services/material-palette-generator.service';
 
 @Component({
   selector: 'dynamic-divider',
   standalone: true,
   imports: [],
   template: `
-  <svg aria-hidden="true" width="100%" height="8" fill="none">
-    <pattern id="a" width="91" height="8" patternUnits="userSpaceOnUse">
-        <g clip-path="url(#clip0_2426_11367)">
-            <path
-                d="M114 4c-5.067 4.667-10.133 4.667-15.2 0S88.667-.667 83.6 4 73.467 8.667 68.4 4 58.267-.667 53.2 4 43.067 8.667 38 4 27.867-.667 22.8 4 12.667 8.667 7.6 4-2.533-.667-7.6 4s-10.133 4.667-15.2 0S-32.933-.667-38 4s-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0"
-                stroke="#b8b8b8" stroke-linecap="square"></path>
-        </g>
-    </pattern>
-    <rect width="100%" height="100%" fill="url(#a)"></rect>
+<div class="divider">
+@for (_item of repeat; track _item;) {
+  <!-- <svg viewBox="0 0 1910 211" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path [attr.fill]="color" d="M 0 0 C 485.5 0 485.5 110 971 110 L 971 110 L 971 0 L 0 0 Z" stroke-width="0"></path>
+    <path [attr.fill]="color" d="M 970 110 C 1440 110 1440 0 1910 0 L 1910 0 L 1910 0 L 970 0 Z" stroke-width="0"></path>
+  </svg> -->
+
+  <svg viewBox="0 0 1910 211" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path [attr.fill]="materialPaletteGeneratorService.background || '#01010100'" d="M 0 0 C 485.5 0 485.5 110 971 110 C 1456.5 110 1456.5 0 1910 0" [attr.stroke]="materialPaletteGeneratorService.isDark ? 'white' : 'black'" stroke-width="4" fill="none"></path>
+
+  <path fill="none" d="M 1910 0 L 1910 211 L 0 211 L 0 0 Z" ></path>
 </svg>
+}
+</div>
   `,
   styleUrl: './dynamic-divider.component.scss'
 })
-export class DynamicDividerComponent { }
+export class DynamicDividerComponent {
+
+  repeat: string[] = []
+  color: string = '#01010100'
+
+  constructor(public materialPaletteGeneratorService: MaterialPaletteGeneratorService) {
+    for (let index = 0; index < 100; index++) {
+      this.repeat.push('-')
+
+    }
+  }
+}
