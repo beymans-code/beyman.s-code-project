@@ -161,8 +161,8 @@ export class HomeComponent {
       }
     }
     if (isPlatformBrowser(this.platformId)) {
-      this.crearObservador();
-      this.observarElementos();
+      // this.crearObservador();
+      // this.observarElementos();
     }
   }
 
