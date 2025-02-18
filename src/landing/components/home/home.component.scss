@@ -248,7 +248,7 @@ section {
 
 @media screen and (max-width: 1000px) {
     #imageBackground1>div {
-        zoom: 0.85;
+        zoom: 0.98;
     }
 
     #imageBackground1 {
@@ -259,11 +259,11 @@ section {
 
 @media screen and (max-width: 767px) {
     #imageBackground1>div {
-        zoom: 0.75;
+        zoom: 0.90;
     }
 
     .body-title {
-        zoom: 0.9;
+        zoom: 0.92;
     }
 
     .beyman-container {
@@ -280,12 +280,12 @@ section {
 
     .grid-cards,
     #imageBackground1>div, .headerDividers {
-        zoom: 0.7;
+        zoom: 0.88;
     }
 
     .home-text,
     .body-title {
-        zoom: 0.75;
+        zoom: 0.85;
     }
 
     #beyman {
@@ -296,7 +296,7 @@ section {
 
 @media screen and (max-width: 380px) {
     .body-title {
-        zoom: 0.6;
+        zoom: 0.7;
     }
 }
 
