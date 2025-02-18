@@ -65,15 +65,15 @@ router-outlet~* {
     margin: auto;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     router-outlet~* {
         width: calc(100vw - 40px);
     }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 500px) {
     router-outlet~* {
-        width: calc(100vw - 35px);
+        width: calc(100vw - 20px);
     }
 }
 

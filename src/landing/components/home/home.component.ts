@@ -167,47 +167,46 @@ export class HomeComponent {
   }
 
   crearObservador() {
+
     const opciones = {
       root: null,
-      threshold: Array.from({ length: 1000001 }, (_, i) => i / 1000000) // Umbrales de 0% a 100%
+      threshold: Array.from({ length: 101 }, (_, i) => i / 100) // Umbrales de 0% a 100% en pasos de 1%
     };
+  
     let elementoVisible: ElementRef | null = null;
     this.observer = new IntersectionObserver((entradas) => {
-
-      entradas.forEach((entrada, i) => {
+      requestAnimationFrame(() => {
         const targetArray = this.isMobile ? this.mobileSections : this.images;
-
-        const index = targetArray.toArray().findIndex(el => el.nativeElement === entrada.target);
-
-        if (index > 0) {
-          const elementoAnterior = targetArray.toArray()[index - 1];
-          const opacidad = (1 - entrada.intersectionRatio).toFixed(1); // Calcula opacidad invertida
-          const desplazamientoMaximo = elementoAnterior.nativeElement.offsetHeight;
-
-          elementoAnterior.nativeElement.style.opacity = opacidad === '0.1' ? '0' : opacidad;
-          if (entrada.intersectionRatio === 0) {
-            // Resetear desplazamiento cuando el elemento sale completamente del viewport
-            elementoAnterior.nativeElement.style.transform = 'translateY(0) scale(1)';
-          } else {
-            const desplazamientoY = desplazamientoMaximo * entrada.intersectionRatio;
-            elementoAnterior.nativeElement.style.transform = `translateY(${desplazamientoY}px) scale(0.97${opacidad.replace('0.', '')})`;
+        const elementos = targetArray.toArray(); // Almacenar una sola vez
+  
+        entradas.forEach((entrada) => {
+          const index = elementos.findIndex(el => el.nativeElement === entrada.target);
+          if (index > 0) {
+            const elementoAnterior = elementos[index - 1];
+            const opacidad = 1 - entrada.intersectionRatio; // Opacidad inversa
+            const desplazamientoMaximo = elementoAnterior.nativeElement.offsetHeight;
+  
+            elementoAnterior.nativeElement.style.opacity = opacidad.toFixed(2);
+            elementoAnterior.nativeElement.style.transform =
+              entrada.intersectionRatio === 0
+                ? 'translateY(0) scale(1)'
+                : `translateY(${desplazamientoMaximo * entrada.intersectionRatio}px) scale(${1 - 0.03 * (1 - entrada.intersectionRatio)})`;
           }
-        }
-
-
-        if (entrada.intersectionRatio > 0.5) {
-          elementoVisible = targetArray.toArray()[index];
-          this.visible = index;
-        } else if (elementoVisible?.nativeElement === entrada.target && entrada.intersectionRatio <= 0.5) {
-          this.visible = targetArray.length - 1;
-        }
-
-        if (index === targetArray.length - 1) {
-          const ultimoElemento = targetArray.toArray()[index];
-          const opacidad = 1 - entrada.intersectionRatio;
-          ultimoElemento.nativeElement.style.opacity = opacidad;
-          ultimoElemento.nativeElement.style.transform = 'translateY(0)';
-        }
+  
+          if (entrada.intersectionRatio > 0.5) {
+            elementoVisible = elementos[index];
+            this.visible = index;
+          } else if (elementoVisible?.nativeElement === entrada.target && entrada.intersectionRatio <= 0.5) {
+            this.visible = elementos.length - 1;
+          }
+  
+          if (index === elementos.length - 1) {
+            const ultimoElemento = elementos[index];
+            const opacidad = (1 - entrada.intersectionRatio).toFixed(2);
+            ultimoElemento.nativeElement.style.opacity = opacidad;
+            ultimoElemento.nativeElement.style.transform = 'translateY(0)';
+          }
+        });
       });
     }, opciones);
   }

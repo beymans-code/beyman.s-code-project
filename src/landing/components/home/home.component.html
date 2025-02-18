@@ -2,10 +2,10 @@
     <img id="imageBackground" [src]="homeCoverImage" alt="" />
     <div class="col-sm-12 col-md-6 py-2 d-flex justify-content-center align-items-center beyman-container">
         <form action="#" class="file-form">
-            <input type="file" id="imgfile" (change)="setImage($event)" />
+            <input type="file" id="imgfile" (change)="setImage($event)"  style="pointer-events: none;"/>
         </form>
         <div id="beyman" class="triangle">
-            <img src="assets/images/beyman.png" alt="" />
+            <img src="assets/images/beyman-2.jpg" alt="" />
         </div>
     </div>
     <div class="col-sm-12 col-md-6 d-flex py-2">
@@ -83,7 +83,7 @@
         @if (idx > 0) {
             <dynamic-divider class="mobileDivider"></dynamic-divider>
         }
-        <div class="row m-auto mt-0" style="transform: translateY(-90px);">
+        <div class="row m-auto mt-0 p-0" style="transform: translateY(-90px);">
             <div class="col-12">
                 <div class="d-sm-block d-md-block d-lg-none mobile-image-home mb-3" style="opacity: 1; height: 150px;">
                     <ng-container
@@ -123,4 +123,4 @@
 </ng-template>
 
 
-<div style="width: 10px; height: 100vh;"></div>
+<!-- <div style="width: 10px; height: 100vh;"></div> -->

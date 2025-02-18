@@ -6,6 +6,11 @@
 @import url('assets/_cards.scss');
 @import url('assets/_buttons.scss');
 
+* {
+    scroll-behavior: smooth !important;
+    user-select: none !important;
+}
+
 html {
     background: #F4F8FB;
 }

@@ -12,7 +12,7 @@
     position: relative;
     overflow: hidden;
     padding: 50px 10px;
-    margin: 30px 3px;
+    margin: 30px 0px;
 
     img#imageBackground {
         display: block;
@@ -35,12 +35,29 @@
         box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
 
         img {
-            width: 100%;
+            width: 108%;
             position: absolute;
+            // filter: drop-shadow(-17px 17px 23px #000000a1);
             // bottom: -10px;
             // filter: drop-shadow(-19px 0px 25px #0000003d);
             // transform: rotate(10deg);
+
             bottom: 0;
+            top: 0;
+            left: -10px;
+
+        }
+        &::after {
+            content: '';
+            width: 108%;
+            height: 108%;
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            left: -10px;
+            background: var(--primary);
+            z-index: 2;
+            opacity: 0.2;
         }
     }
 
@@ -112,7 +129,8 @@ section {
     // min-height: 100vh;
     height: 100vh;
     min-height: 700px;
-    & ~ dynamic-divider {
+
+    &~dynamic-divider {
         position: absolute;
         transform: translateY(6px);
         z-index: 1;
@@ -248,7 +266,7 @@ section {
 
 @media screen and (max-width: 1000px) {
     #imageBackground1>div {
-        zoom: 0.98;
+        // zoom: 0.98;
     }
 
     #imageBackground1 {
@@ -258,8 +276,12 @@ section {
 }
 
 @media screen and (max-width: 767px) {
+    #imageBackground1 {
+        background-size: 350% !important;
+    }
+
     #imageBackground1>div {
-        zoom: 0.90;
+        // zoom: 0.90;
     }
 
     .body-title {
@@ -279,13 +301,14 @@ section {
 @media screen and (max-width: 500px) {
 
     .grid-cards,
-    #imageBackground1>div, .headerDividers {
-        zoom: 0.88;
+    #imageBackground1>div,
+    .headerDividers {
+        // zoom: 0.88;
     }
 
-    .home-text,
+    // .home-text,
     .body-title {
-        zoom: 0.85;
+        zoom: 0.8;
     }
 
     #beyman {
@@ -312,11 +335,11 @@ section {
         left: -10px;
         top: 0;
         z-index: 0;
-        background-image: url(../../../assets/images/noise-min.png);
+        background-image: url(../../../assets/images/noise.png);
         height: 100%;
         width: calc(100% + 20px);
-        opacity: 0.19;
-        filter: blur(0.5px);
+        opacity: 0.09 !important;
+        filter: blur(0.2px);
     }
 }
 
@@ -329,7 +352,6 @@ section {
 
     &::before {
         z-index: -1;
-        opacity: 0.1;
     }
 }
 
@@ -361,10 +383,13 @@ section {
     }
 }
 
-.image-home-section, .mobileSection {
-    transition: all 0.3s ease !important;
+.image-home-section,
+.mobileSection {
+    // transition: none !important;
     opacity: 0;
     transform: translateY(0px);
+    transition-delay: 0s !important;
+    transition: transform 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s !important;
     /* Posición inicial sin desplazamiento */
 
     &.last {
