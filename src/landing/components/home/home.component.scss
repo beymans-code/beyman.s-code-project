@@ -335,10 +335,11 @@ section {
         left: -10px;
         top: 0;
         z-index: 0;
-        background-image: url(../../../assets/images/noise.png);
+        // background-image: url(../../../assets/images/noise.png);
+        background-color: var(--primary);
         height: 100%;
         width: calc(100% + 20px);
-        opacity: 0.09 !important;
+        opacity: 0.15 !important;
         filter: blur(0.2px);
     }
 }

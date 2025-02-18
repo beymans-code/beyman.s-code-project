@@ -186,17 +186,17 @@ export class HomeComponent {
             const opacidad = 1 - entrada.intersectionRatio; // Opacidad inversa
             const desplazamientoMaximo = elementoAnterior.nativeElement.offsetHeight;
   
-            // elementoAnterior.nativeElement.style.opacity = opacidad.toFixed(2);
-            // elementoAnterior.nativeElement.style.transform =
-            //   entrada.intersectionRatio === 0
-            //     ? 'translateY(0) scale(1)'
-            //     : `translateY(${desplazamientoMaximo * entrada.intersectionRatio}px) scale(${1 - 0.03 * (1 - entrada.intersectionRatio)})`;
+            elementoAnterior.nativeElement.style.opacity = opacidad.toFixed(2);
+            elementoAnterior.nativeElement.style.transform =
+              entrada.intersectionRatio === 0
+                ? 'translateY(0) scale(1)'
+                : `translateY(${desplazamientoMaximo * entrada.intersectionRatio}px) scale(${1 - 0.03 * (1 - entrada.intersectionRatio)})`;
             // elementoAnterior.nativeElement.style.opacity = opacidad.toFixed(2);
             // elementoAnterior.nativeElement.style.transform =
             //   entrada.intersectionRatio === 0
             //     ? 'scale(1)'
             //     : `scale(${(1 - entrada.intersectionRatio).toFixed(4)})`;
-            elementoAnterior.nativeElement.style.opacity = opacidad.toFixed(2);
+            // elementoAnterior.nativeElement.style.opacity = opacidad.toFixed(2);
           }
   
           if (entrada.intersectionRatio > 0.5) {
