@@ -169,7 +169,7 @@ export class HomeComponent {
   crearObservador() {
     const opciones = {
       root: null,
-      threshold: Array.from({ length: 11 }, (_, i) => i / 10) // Umbrales de 0% a 100%
+      threshold: Array.from({ length: 1000001 }, (_, i) => i / 1000000) // Umbrales de 0% a 100%
     };
     let elementoVisible: ElementRef | null = null;
     this.observer = new IntersectionObserver((entradas) => {
@@ -190,7 +190,7 @@ export class HomeComponent {
             elementoAnterior.nativeElement.style.transform = 'translateY(0) scale(1)';
           } else {
             const desplazamientoY = desplazamientoMaximo * entrada.intersectionRatio;
-            elementoAnterior.nativeElement.style.transform = `translateY(${desplazamientoY}px) scale(0.9${opacidad.replace('0.', '')})`;
+            elementoAnterior.nativeElement.style.transform = `translateY(${desplazamientoY}px) scale(0.97${opacidad.replace('0.', '')})`;
           }
         }
 
