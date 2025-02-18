@@ -71,12 +71,6 @@ router-outlet~* {
     }
 }
 
-@media screen and (max-width: 500px) {
-    router-outlet~* {
-        width: calc(100vw - 20px);
-    }
-}
-
 // body.dark #imageBackground1::before {
 //     background: #00000082 !important;
 // }
